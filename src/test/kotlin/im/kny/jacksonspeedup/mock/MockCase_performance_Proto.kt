@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.afterburner.AfterburnerModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson
 
@@ -23,7 +24,7 @@ class MockCase_performance_Proto {
             .registerModule(Jdk8Module())
             .registerModule(KotlinModule())
             .registerModule(JavaTimeModule())
-//            .registerModule(AfterburnerModule())
+            .registerModule(AfterburnerModule())
             .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false)
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
@@ -37,7 +38,7 @@ class MockCase_performance_Proto {
             .registerModule(Jdk8Module())
             .registerModule(KotlinModule())
             .registerModule(JavaTimeModule())
-            //          .registerModule(AfterburnerModule())
+                      .registerModule(AfterburnerModule())
             .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false)
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
@@ -92,12 +93,11 @@ class MockCase_performance_Proto {
         val expParseTimeDeserializer = (11_000 * minDeserializeMs) / (timedIterations)
         println(
             """
-            
             Expected parsetime for 11 million documents:
             11 million with deserializers ${df.format(expParseTimeDeserializer)} seconds
             11 million with Reflection: ${df.format(expParseTimeReflection)} seconds
             
-            """
+            """.trimIndent()
         )
     }
 
