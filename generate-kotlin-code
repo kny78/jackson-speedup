@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+dir=$(dirname $(readlink -f "$0"))
+cd "$dir"
+
+function fail()
+{
+    echo "$@" >&2
+    exit 1
+}
+
+
+function usage() {
+	cat <<EOF
+    $0 [-a] [-d]
+
+    Where
+      -d Forces download of openapi-generator-cli.
+
+EOF
+}
+rm -rf target/api-model
+mkdir -p target/api-model
+
+config_file="openapi-generator-config.yaml"
+rm -rf tmp
+mkdir tmp
+tmp_output="tmp"
+rm -rf $tmp_output
+mkdir $tmp_output
+force_download=false
+
+while getopts "ad" opt; do
+	case $opt in
+	d)
+		force_download=true
+		;;
+	*)
+		usage
+		exit 0
+		;;
+	esac
+done
+
+jar_file="openapi-generator-cli.jar"
+if $force_download || [ ! -f "${jar_file}" ]; then
+	echo "$jar_file will be downloaded."
+	wget -q https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.1.1/openapi-generator-cli-5.1.1.jar -O $jar_file
+fi
+
+
+function import_model(){
+	name="$1"
+	packagename="$2"
+	urlname="$3"
+	version="$4"
+
+	cat <<EOF
+
+
+************************
+*
+* $name
+*
+***********************
+EOF
+
+curl "https://app.swaggerhub.com/apiproxy/registry/Skatteetaten_FREG/$urlname/${version}?resolved=true&pretty=true" \
+	-H 'Accept: application/json' \
+	-H 'Accept-Language: en-GB,en;q=0.5' \
+	-o src/main/resources/openapi/freg-api-$name-original.json
+
+jq 	'' src/main/resources/openapi/freg-api-$name-original.json >src/main/resources/openapi/freg-api-$name.json
+	java \
+		-jar $jar_file \
+		generate \
+		-g kotlin \
+		--template-dir ./openapi-templates \
+		-c $config_file \
+		-o $tmp_output \
+		-i src/main/resources/openapi/freg-api-$name.json \
+		--package-name im.kny.jacksonspeedup.$packagename \
+		|| fail "OpenAPI generator failed"
+
+	echo "Replacing the current model"
+	model_src_dir="src/main/kotlin/im/kny/jacksonspeedup/$packagename"
+	rm -rf "${model_src_dir}/models"
+	mkdir -p "${model_src_dir}"
+	cp -r tmp/${model_src_dir}/models ${model_src_dir}
+
+#	echo "Fix Sivilstand.Sivilstand"
+#	sed \
+#		-i ${model_src_dir}/models/Sivilstand.kt \
+#		-e "s/Sivilstand\.Sivilstand/Sivilstand/g"
+
+}
+
+
+import_model "offentlig-med-hjemmel" "offentligmedhjemmel" "Offentlig-med-hjemmel" "1.5"
+
+
+# Offentlig med hjemmel
+# https://app.swaggerhub.com/apis/Skatteetaten_FREG/Offentlig-med-hjemmel/1.256.1
+# https://app.swaggerhub.com/apiproxy/registry/Skatteetaten_FREG/Offentlig-med-hjemmel/1.256.1?resolved=true&flatten=true&pretty=true
+
+# Offentlig uten hjemmel
+# https://app.swaggerhub.com/apis/Skatteetaten_FREG/RettighetspakkerUtenTaushetsbelagtOff/1.5.0
+# https://app.swaggerhub.com/apiproxy/registry/Skatteetaten_FREG/RettighetspakkerUtenTaushetsbelagtOff/1.5.0?resolved=true&flatten=true&pretty=true
+
+# Finans
+# https://app.swaggerhub.com/apis/Skatteetaten_FREG/LesemodellBegrensetTaushetsbelagt/1.21.0
+# https://app.swaggerhub.com/apiproxy/registry/Skatteetaten_FREG/LesemodellBegrensetTaushetsbelagt/1.21.0?resolved=true&flatten=true&pretty=true
+
+# Privat | Privat virksomhet uten hjemmel | Presse
+# https://app.swaggerhub.com/apis/Skatteetaten_FREG/LesemodellUtenTaushetsbelagt/1.14.0
+# https://app.swaggerhub.com/apiproxy/registry/Skatteetaten_FREG/LesemodellUtenTaushetsbelagt/1.14.0?resolved=true&flatten=true&pretty=true

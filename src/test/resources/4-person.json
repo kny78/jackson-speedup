@@ -1,0 +1,399 @@
+{
+  "identifikasjonsnummer": [
+    {
+      "status": "iBruk",
+      "foedselsEllerDNummer": "25077834365",
+      "identifikatortype": "foedselsnummer",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF"
+    }
+  ],
+  "status": [
+    {
+      "status": "bosatt",
+      "ajourholdstidspunkt": "1978-07-25T00:00:00Z",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "1978-07-25T00:00:00Z"
+    }
+  ],
+  "kjoenn": [
+    {
+      "kjoenn": "mann",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF"
+    }
+  ],
+  "foedsel": [
+    {
+      "foedselsaar": "1978",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "foedselsdato": "1978-07-25",
+      "foedekommuneINorge": "1201",
+      "foedeland": "NOR"
+    }
+  ],
+  "familierelasjon": [
+    {
+      "relatertPersonsRolle": "far",
+      "ajourholdstidspunkt": "2018-10-13T12:54:53.185+02:00",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "1978-07-25T00:00:00+01:00",
+      "relatertPerson": "09095740313",
+      "minRolleForPerson": "barn"
+    },
+    {
+      "relatertPersonsRolle": "mor",
+      "ajourholdstidspunkt": "2018-10-13T12:54:53.185+02:00",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "1978-07-25T00:00:00+01:00",
+      "relatertPerson": "12045646635",
+      "minRolleForPerson": "barn"
+    },
+    {
+      "relatertPersonsRolle": "ektefelleEllerPartner",
+      "ajourholdstidspunkt": "2007-10-23T12:00:41.67143+02:00",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "2007-10-19T00:00:00+02:00",
+      "relatertPerson": "10018930558",
+      "minRolleForPerson": "ektefelleEllerPartner"
+    },
+    {
+      "relatertPersonsRolle": "barn",
+      "ajourholdstidspunkt": "2018-10-13T10:49:18.926+02:00",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "2010-09-07T00:00:00+02:00",
+      "relatertPerson": "07091089941",
+      "minRolleForPerson": "far"
+    },
+    {
+      "relatertPersonsRolle": "barn",
+      "ajourholdstidspunkt": "2018-10-13T10:49:18.926+02:00",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "2012-10-06T00:00:00+02:00",
+      "relatertPerson": "06101292957",
+      "minRolleForPerson": "far"
+    },
+    {
+      "relatertPersonsRolle": "barn",
+      "ajourholdstidspunkt": "2018-10-13T10:49:18.926+02:00",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "2014-09-05T00:00:00+02:00",
+      "relatertPerson": "05091487189",
+      "minRolleForPerson": "far"
+    }
+  ],
+  "sivilstand": [
+    {
+      "sivilstand": "gift",
+      "ajourholdstidspunkt": "2007-10-23T12:00:41.684063+02:00",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Vigsel",
+      "gyldighetstidspunkt": "2007-10-19T00:00:00+02:00",
+      "sivilstandsdato": "2007-10-19",
+      "relatertVedSivilstand": "10018930558"
+    }
+  ],
+  "navn": [
+    {
+      "fornavn": "OLE",
+      "etternavn": "BRUMM",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "forkortetNavn": "BRUMM OLE"
+    }
+  ],
+  "bostedsadresse": [
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2019-12-30T16:53:56+01:00",
+      "erGjeldende": true,
+      "kilde": "",
+      "aarsak": "Kommuneregulering",
+      "gyldighetstidspunkt": "2011-02-01T00:00:00+01:00",
+      "vegadresse": {
+        "kommunenummer": "4624",
+        "adressenavn": "ØVRE PLASSEN",
+        "bruksenhetsnummer": "",
+        "adressenummer": {
+          "husnummer": "103"
+        },
+        "adressekode": "01098",
+        "poststed": {
+          "poststedsnavn": "OS",
+          "postnummer": "5210"
+        },
+        "coAdressenavn": ""
+      },
+      "adresseIdentifikatorFraMatrikkelen": "151731140",
+      "flyttedato": "2011-01-18",
+      "grunnkrets": 304,
+      "stemmekrets": 4,
+      "skolekrets": 7,
+      "kirkekrets": 1
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2011-02-01T00:00:00+01:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Flytting innen kommunen",
+      "gyldighetstidspunkt": "2011-02-01T00:00:00+01:00",
+      "vegadresse": {
+        "kommunenummer": "1243",
+        "adressenavn": "ØVRE PLASSEN",
+        "bruksenhetsnummer": "",
+        "adressenummer": {
+          "husnummer": "103"
+        },
+        "adressekode": "01098",
+        "poststed": {
+          "poststedsnavn": "OS",
+          "postnummer": "5210"
+        },
+        "coAdressenavn": ""
+      },
+      "adresseIdentifikatorFraMatrikkelen": "151731140",
+      "flyttedato": "2011-01-18",
+      "grunnkrets": 304,
+      "stemmekrets": 4,
+      "skolekrets": 7,
+      "kirkekrets": 1
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2010-08-20T00:00:00+02:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Innflytting til annen kommune",
+      "gyldighetstidspunkt": "2010-08-16T00:00:00+02:00",
+      "vegadresse": {
+        "kommunenummer": "1243",
+        "adressenavn": "TØSDALSVEGEN",
+        "adressenummer": {
+          "husnummer": "15"
+        },
+        "adressekode": "01091",
+        "poststed": {
+          "poststedsnavn": "OS",
+          "postnummer": "5200"
+        }
+      },
+      "flyttedato": "2010-08-16"
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2007-12-03T00:00:00+01:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Adresseendring uten flytting",
+      "gyldighetstidspunkt": "2007-11-12T00:00:00+01:00",
+      "vegadresse": {
+        "kommunenummer": "1102",
+        "adressenavn": "ASPERHOLEN",
+        "bruksenhetsnummer": "H0302",
+        "adressenummer": {
+          "husnummer": "85"
+        },
+        "adressekode": "02650",
+        "poststed": {
+          "poststedsnavn": "SANDNES",
+          "postnummer": "4329"
+        },
+        "coAdressenavn": "LEILIGHET 81"
+      },
+      "flyttedato": "2007-11-12"
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2007-11-27T00:00:00+01:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Flytting innen kommunen",
+      "gyldighetstidspunkt": "2007-11-12T00:00:00+01:00",
+      "vegadresse": {
+        "kommunenummer": "1102",
+        "adressenavn": "ASPERHOLEN",
+        "bruksenhetsnummer": "H0301",
+        "adressenummer": {
+          "husnummer": "85"
+        },
+        "adressekode": "02650",
+        "poststed": {
+          "poststedsnavn": "SANDNES",
+          "postnummer": "4329"
+        },
+        "coAdressenavn": "LEILIGHET 81"
+      },
+      "flyttedato": "2007-11-12"
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2006-05-16T00:00:00+02:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Innflytting til annen kommune",
+      "gyldighetstidspunkt": "2006-05-15T00:00:00+02:00",
+      "vegadresse": {
+        "kommunenummer": "1102",
+        "adressenavn": "HANAVEIEN",
+        "bruksenhetsnummer": "H0407",
+        "adressenummer": {
+          "husnummer": "15"
+        },
+        "adressekode": "11200",
+        "poststed": {
+          "poststedsnavn": "SANDNES",
+          "postnummer": "4327"
+        },
+        "coAdressenavn": "LEILIGHET 408"
+      },
+      "flyttedato": "2006-05-01"
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2005-09-13T00:00:00+02:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Flytting innen kommunen",
+      "gyldighetstidspunkt": "2005-09-12T00:00:00+02:00",
+      "vegadresse": {
+        "kommunenummer": "1201",
+        "adressenavn": "BRUMMSGATEN",
+        "bruksenhetsnummer": "H0301",
+        "adressenummer": {
+          "husnummer": "27"
+        },
+        "adressekode": "14060",
+        "poststed": {
+          "poststedsnavn": "BERGEN",
+          "postnummer": "5015"
+        }
+      },
+      "flyttedato": "2005-09-12"
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2005-02-09T00:00:00+01:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Innflytting til annen kommune",
+      "gyldighetstidspunkt": "2005-02-08T00:00:00+01:00",
+      "vegadresse": {
+        "kommunenummer": "1201",
+        "adressenavn": "ERIK PONTOPPIDANS GATE",
+        "bruksenhetsnummer": "H0401",
+        "adressenummer": {
+          "husnummer": "6"
+        },
+        "adressekode": "11120",
+        "poststed": {
+          "poststedsnavn": "BERGEN",
+          "postnummer": "5018"
+        }
+      },
+      "flyttedato": "2005-02-05"
+    },
+    {
+      "adressegradering": "ugradert",
+      "ajourholdstidspunkt": "2004-12-12T00:00:00+01:00",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Adresseendring fra matrikkelen",
+      "gyldighetstidspunkt": "1981-12-08T00:00:00+01:00",
+      "vegadresse": {
+        "kommunenummer": "1243",
+        "adressenavn": "TØSDALSVEGEN",
+        "adressenummer": {
+          "husnummer": "15"
+        },
+        "adressekode": "01091",
+        "poststed": {
+          "poststedsnavn": "OS",
+          "postnummer": "5200"
+        }
+      },
+      "flyttedato": "1981-10-31"
+    },
+    {
+      "adressegradering": "ugradert",
+      "erGjeldende": false,
+      "kilde": "KILDE_DSF",
+      "aarsak": "Årsakskode fra DSF: ",
+      "gyldighetstidspunkt": "1981-12-08T00:00:00+01:00",
+      "matrikkeladresse": {
+        "matrikkelnummer": {
+          "kommunenummer": "1243",
+          "gaardsnummer": 54,
+          "bruksnummer": 564,
+          "festenummer": 0
+        },
+        "undernummer": 0,
+        "adressetilleggsnavn": "TØSDALSVEGEN",
+        "poststed": {
+          "poststedsnavn": "OS",
+          "postnummer": "5200"
+        }
+      },
+      "flyttedato": "1981-10-31"
+    }
+  ],
+  "preferertKontaktadresse": [
+    {
+      "valg": "bostedsadresse",
+      "erGjeldende": true,
+      "kilde": "",
+      "adressegradering": "ugradert",
+      "kontaktadresseIFrittFormat": {
+        "adresselinje": [
+          "ØVRE PLASSEN 103",
+          "5210 OS"
+        ]
+      }
+    }
+  ],
+  "foreldreansvar": [
+    {
+      "ansvar": "felles",
+      "ajourholdstidspunkt": "2010-09-16T11:29:27.998092Z",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "2010-09-07T00:00:00Z",
+      "ansvarssubjekt": "07091089941",
+      "ansvarlig": "25077834365"
+    },
+    {
+      "ansvar": "felles",
+      "ajourholdstidspunkt": "2012-10-16T13:01:00.693542Z",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "2012-10-06T00:00:00Z",
+      "ansvarssubjekt": "06101292957",
+      "ansvarlig": "25077834365"
+    },
+    {
+      "ansvar": "felles",
+      "ajourholdstidspunkt": "2014-09-18T07:50:05.791409Z",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF",
+      "gyldighetstidspunkt": "2014-09-05T00:00:00Z",
+      "ansvarssubjekt": "05091487189",
+      "ansvarlig": "25077834365"
+    }
+  ],
+  "statsborgerskap": [
+    {
+      "statsborgerskap": "NOR",
+      "erGjeldende": true,
+      "kilde": "KILDE_DSF"
+    }
+  ]
+}

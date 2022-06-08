@@ -1,0 +1,128 @@
+{{#parcelizeModels}}
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+{{/parcelizeModels}}
+{{#serializableModel}}
+import java.io.Serializable
+{{/serializableModel}}
+
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.core.JsonToken
+import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.JsonDeserializer
+import com.fasterxml.jackson.databind.type.*
+import java.time.*
+import java.time.format.*
+/**
+ * {{{description}}}
+{{#vars}}   
+ * @param {{name}} {{{description}}}
+{{/vars}}
+ */
+{{#parcelizeModels}}
+@Parcelize
+{{/parcelizeModels}}
+data class {{classname}}(
+{{#requiredVars}}
+{{>data_class_req_var}}{{^-last}},
+{{/-last}}{{/requiredVars}}{{#hasRequired}}{{#hasOptional}},
+{{/hasOptional}}{{/hasRequired}}{{#optionalVars}}{{>data_class_opt_var}}{{^-last}},
+{{/-last}}{{/optionalVars}}
+) {{^serializableModel}}{{#parcelizeModels}} : Parcelable{{/parcelizeModels}}{{/serializableModel}}{{^parcelizeModels}}{{#serializableModel}}: Serializable {{/serializableModel}}{{/parcelizeModels}}{{#parcelizeModels}}{{#serializableModel}} : Parcelable, Serializable {{/serializableModel}}{{/parcelizeModels}}
+{
+{{#serializableModel}}
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
+{{/serializableModel}}
+{{#hasEnums}}
+    {{#vars}}
+    {{#isEnum}}
+    /**
+    * {{{description}}}
+    * Values: {{#allowableValues}}{{#enumVars}}{{&name}}{{^-last}},{{/-last}}{{/enumVars}}{{/allowableValues}}
+    */
+    enum class {{nameInCamelCase}}(val value: kotlin.String){
+    {{#allowableValues}}
+    {{#enumVars}}
+        {{&name}}({{{value}}}){{^-last}},{{/-last}}{{#-last}};{{/-last}}
+    {{/enumVars}}
+    {{/allowableValues}}
+    }
+{{/isEnum}}
+{{/vars}}
+{{/hasEnums}}
+    class ParsedValues{
+        {{#requiredVars}}
+        {{#isArray}}
+        {{#items.isEnum}}
+        var {{name}}: List<{{classname}}.{{items.nameInCamelCase}}>? = null
+        {{/items.isEnum}}
+        {{^items.isEnum}}
+        var {{name}}: List<{{items.dataType}}>? = null
+        {{/items.isEnum}}
+        {{/isArray}}
+        {{^isArray}}
+        {{#isEnum}}
+        var {{name}}: {{classname}}.{{nameInCamelCase}}? = null
+        {{/isEnum}}
+        {{^isEnum}}
+        var {{name}}: {{&dataType}}? = null
+        {{/isEnum}}
+        {{/isArray}}
+        {{/requiredVars}}
+        {{#optionalVars}}
+        {{#isArray}}
+        {{#items.isEnum}}
+        var {{name}}: List<{{classname}}.{{items.nameInCamelCase}}>? = null
+        {{/items.isEnum}}
+        {{^items.isEnum}}
+        var {{name}}: List<{{items.dataType}}>? = null
+        {{/items.isEnum}}
+        {{/isArray}}
+        {{^isArray}}
+        {{#isEnum}}
+        var {{name}}: {{classname}}.{{nameInCamelCase}}? = null
+        {{/isEnum}}
+        {{^isEnum}}
+        var {{name}}: {{&dataType}}? = null
+        {{/isEnum}}
+        {{/isArray}}
+        {{/optionalVars}}
+    }
+
+    class Deserializer : JsonDeserializer<{{classname}}>() {
+        override fun deserialize(p: JsonParser, ctx: DeserializationContext): {{classname}} {
+            val parsedValues = ParsedValues()
+
+            var curr = p.currentToken
+
+            if (curr != JsonToken.START_OBJECT) {
+                throw IllegalStateException("Should be start object")
+            }
+
+            curr = p.nextToken()
+
+            while (curr == JsonToken.FIELD_NAME) {
+                val field = p.text
+                curr = p.nextToken()
+                when (field) {
+{{#requiredVars}}{{>deserialize_value}}{{/requiredVars}}
+{{#optionalVars}}{{>deserialize_value}}{{/optionalVars}}
+                    else -> p.skipChildren()
+                }
+                curr = p.nextToken()
+            }
+
+            return {{classname}}({{#requiredVars}}
+                {{name}} = parsedValues.{{name}}!!,{{/requiredVars}}{{#optionalVars}}
+                {{name}} = parsedValues.{{name}},{{/optionalVars}})
+        }
+    }
+
+    companion object {
+        val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
+    }
+}
