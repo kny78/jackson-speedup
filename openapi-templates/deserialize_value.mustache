@@ -72,11 +72,11 @@
 {{/isFloat}}
 {{^isFloat}}
 {{#isDateTime}}
-                    "{{name}}" -> parsedValues.{{name}} = OffsetDateTime.parse(p.text)
+                    "{{name}}" -> parsedValues.{{name}} = java.time.OffsetDateTime.parse(p.text)
 {{/isDateTime}}
 {{^isDateTime}}
 {{#isDate}}
-                    "{{name}}" -> parsedValues.{{name}} = LocalDate.parse(p.text)
+                    "{{name}}" -> parsedValues.{{name}} = java.time.LocalDate.parse(p.text)
 {{/isDate}}
 {{^isDate}}
 {{#isModel}}
