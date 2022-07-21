@@ -21,43 +21,41 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param foedselsEllerDNummer 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1soekresponsePersonsoekResponse(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1soekresponsePersonsoekResponse (
+
     @field:JsonProperty("foedselsEllerDNummer")
     val foedselsEllerDNummer: kotlin.collections.List<kotlin.String>? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var foedselsEllerDNummer: List<kotlin.String>? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1soekresponsePersonsoekResponse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1soekresponsePersonsoekResponse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "foedselsEllerDNummer" -> {
@@ -72,13 +70,13 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1soekresponsePersonsoekResp
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1soekresponsePersonsoekResponse(
                 foedselsEllerDNummer = parsedValues.foedselsEllerDNummer,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

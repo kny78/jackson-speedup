@@ -22,17 +22,17 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringuttrekkv1requestKommunenummer
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param personstatustyper 
  * @param doedsaarFraOgMed 
  * @param doedsaarTilOgMed 
@@ -43,61 +43,75 @@ import java.time.format.*
  * @param sivilstandstype 
  * @param statsborgerskap 
  */
-data class Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest(
+
+data class Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest (
+
     @field:JsonProperty("personstatustyper")
     val personstatustyper: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Personstatustyper>,
+
     @field:JsonProperty("doedsaarFraOgMed")
     val doedsaarFraOgMed: kotlin.String? = null,
+
     @field:JsonProperty("doedsaarTilOgMed")
     val doedsaarTilOgMed: kotlin.String? = null,
+
     @field:JsonProperty("foedselsaarFraOgMed")
     val foedselsaarFraOgMed: kotlin.String? = null,
+
     @field:JsonProperty("foedselsaarTilOgMed")
     val foedselsaarTilOgMed: kotlin.String? = null,
+
     @field:JsonProperty("kjoenn")
     val kjoenn: Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Kjoenn? = null,
+
     @field:JsonProperty("kommunenummer")
     val kommunenummer: Folkeregisterettilgjengeliggjoeringuttrekkv1requestKommunenummer? = null,
+
     @field:JsonProperty("sivilstandstype")
     val sivilstandstype: Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Sivilstandstype? = null,
+
     @field:JsonProperty("statsborgerskap")
     val statsborgerskap: kotlin.String? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: aktiv,bosatt,utflyttet,doed,inaktiv
-    */
-    enum class Personstatustyper(val value: kotlin.String){
-        aktiv("aktiv"),
-        bosatt("bosatt"),
-        utflyttet("utflyttet"),
-        doed("doed"),
-        inaktiv("inaktiv");
+     * 
+     *
+     * Values: aktiv,bosatt,utflyttet,doed,inaktiv
+     */
+    enum class Personstatustyper(val value: kotlin.String) {
+        @JsonProperty(value = "aktiv") aktiv("aktiv"),
+        @JsonProperty(value = "bosatt") bosatt("bosatt"),
+        @JsonProperty(value = "utflyttet") utflyttet("utflyttet"),
+        @JsonProperty(value = "doed") doed("doed"),
+        @JsonProperty(value = "inaktiv") inaktiv("inaktiv");
     }
     /**
-    * 
-    * Values: kvinne,mann
-    */
-    enum class Kjoenn(val value: kotlin.String){
-        kvinne("kvinne"),
-        mann("mann");
+     * 
+     *
+     * Values: kvinne,mann
+     */
+    enum class Kjoenn(val value: kotlin.String) {
+        @JsonProperty(value = "kvinne") kvinne("kvinne"),
+        @JsonProperty(value = "mann") mann("mann");
     }
     /**
-    * 
-    * Values: uoppgitt,ugift,gift,enkeEllerEnkemann,skilt,separert,registrertPartner,separertPartner,skiltPartner,gjenlevendePartner
-    */
-    enum class Sivilstandstype(val value: kotlin.String){
-        uoppgitt("uoppgitt"),
-        ugift("ugift"),
-        gift("gift"),
-        enkeEllerEnkemann("enkeEllerEnkemann"),
-        skilt("skilt"),
-        separert("separert"),
-        registrertPartner("registrertPartner"),
-        separertPartner("separertPartner"),
-        skiltPartner("skiltPartner"),
-        gjenlevendePartner("gjenlevendePartner");
+     * 
+     *
+     * Values: uoppgitt,ugift,gift,enkeEllerEnkemann,skilt,separert,registrertPartner,separertPartner,skiltPartner,gjenlevendePartner
+     */
+    enum class Sivilstandstype(val value: kotlin.String) {
+        @JsonProperty(value = "uoppgitt") uoppgitt("uoppgitt"),
+        @JsonProperty(value = "ugift") ugift("ugift"),
+        @JsonProperty(value = "gift") gift("gift"),
+        @JsonProperty(value = "enkeEllerEnkemann") enkeEllerEnkemann("enkeEllerEnkemann"),
+        @JsonProperty(value = "skilt") skilt("skilt"),
+        @JsonProperty(value = "separert") separert("separert"),
+        @JsonProperty(value = "registrertPartner") registrertPartner("registrertPartner"),
+        @JsonProperty(value = "separertPartner") separertPartner("separertPartner"),
+        @JsonProperty(value = "skiltPartner") skiltPartner("skiltPartner"),
+        @JsonProperty(value = "gjenlevendePartner") gjenlevendePartner("gjenlevendePartner");
     }
     class ParsedValues{
         var personstatustyper: List<Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Personstatustyper>? = null
@@ -110,22 +124,17 @@ data class Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJo
         var sivilstandstype: Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Sivilstandstype? = null
         var statsborgerskap: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "personstatustyper" -> {
                         val list : ArrayList<Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Personstatustyper> = ArrayList()
@@ -150,7 +159,6 @@ data class Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJo
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest(
                 personstatustyper = parsedValues.personstatustyper!!,
                 doedsaarFraOgMed = parsedValues.doedsaarFraOgMed,
@@ -163,8 +171,9 @@ data class Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJo
                 statsborgerskap = parsedValues.statsborgerskap,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

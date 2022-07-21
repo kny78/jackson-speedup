@@ -21,55 +21,56 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param kommunenummer 
  * @param bruksnummer 
  * @param festenummer 
  * @param gaardsnummer 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkelnummer(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkelnummer (
+
     @field:JsonProperty("kommunenummer")
     val kommunenummer: kotlin.String,
+
     @field:JsonProperty("bruksnummer")
     val bruksnummer: kotlin.Long? = null,
+
     @field:JsonProperty("festenummer")
     val festenummer: kotlin.Long? = null,
+
     @field:JsonProperty("gaardsnummer")
     val gaardsnummer: kotlin.Long? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var kommunenummer: kotlin.String? = null
         var bruksnummer: kotlin.Long? = null
         var festenummer: kotlin.Long? = null
         var gaardsnummer: kotlin.Long? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkelnummer>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkelnummer {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "kommunenummer" -> parsedValues.kommunenummer = p.text
 
@@ -81,7 +82,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkelnummer(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkelnummer(
                 kommunenummer = parsedValues.kommunenummer!!,
                 bruksnummer = parsedValues.bruksnummer,
@@ -89,8 +89,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkelnummer(
                 gaardsnummer = parsedValues.gaardsnummer,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

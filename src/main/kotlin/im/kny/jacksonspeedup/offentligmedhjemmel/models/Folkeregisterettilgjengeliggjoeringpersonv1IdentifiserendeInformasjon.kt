@@ -22,40 +22,47 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Personnavn
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param personnavn 
  * @param statsborgerskap 
  * @param foedselsdato 
  * @param kjoenn 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon (
+
     @field:JsonProperty("personnavn")
     val personnavn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn,
+
     @field:JsonProperty("statsborgerskap")
     val statsborgerskap: kotlin.collections.List<kotlin.String>,
+
     @field:JsonProperty("foedselsdato")
     val foedselsdato: java.time.LocalDate? = null,
+
     @field:JsonProperty("kjoenn")
     val kjoenn: Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon.Kjoenn? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: kvinne,mann
-    */
-    enum class Kjoenn(val value: kotlin.String){
-        kvinne("kvinne"),
-        mann("mann");
+     * 
+     *
+     * Values: kvinne,mann
+     */
+    enum class Kjoenn(val value: kotlin.String) {
+        @JsonProperty(value = "kvinne") kvinne("kvinne"),
+        @JsonProperty(value = "mann") mann("mann");
     }
     class ParsedValues{
         var personnavn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn? = null
@@ -63,22 +70,17 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon
         var foedselsdato: java.time.LocalDate? = null
         var kjoenn: Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon.Kjoenn? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "personnavn" -> parsedValues.personnavn = Folkeregisterettilgjengeliggjoeringpersonv1Personnavn.deserializer.deserialize(p, ctx)
                     "statsborgerskap" -> {
@@ -89,7 +91,7 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon
                         parsedValues.statsborgerskap = list
                       }
 
-                    "foedselsdato" -> parsedValues.foedselsdato = LocalDate.parse(p.text)
+                    "foedselsdato" -> parsedValues.foedselsdato = java.time.LocalDate.parse(p.text)
 
                     "kjoenn" -> parsedValues.kjoenn = Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon.Kjoenn.valueOf(p.text)
 
@@ -97,7 +99,6 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon(
                 personnavn = parsedValues.personnavn!!,
                 statsborgerskap = parsedValues.statsborgerskap!!,
@@ -105,8 +106,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1IdentifiserendeInformasjon
                 kjoenn = parsedValues.kjoenn,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

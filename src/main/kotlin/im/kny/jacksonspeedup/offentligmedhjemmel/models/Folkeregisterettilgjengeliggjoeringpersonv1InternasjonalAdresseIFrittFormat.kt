@@ -21,55 +21,56 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param landkode 
  * @param adresselinje 
  * @param byEllerStedsnavn 
  * @param postkode 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresseIFrittFormat(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresseIFrittFormat (
+
     @field:JsonProperty("landkode")
     val landkode: kotlin.String,
+
     @field:JsonProperty("adresselinje")
     val adresselinje: kotlin.collections.List<kotlin.String>? = null,
+
     @field:JsonProperty("byEllerStedsnavn")
     val byEllerStedsnavn: kotlin.String? = null,
+
     @field:JsonProperty("postkode")
     val postkode: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var landkode: kotlin.String? = null
         var adresselinje: List<kotlin.String>? = null
         var byEllerStedsnavn: kotlin.String? = null
         var postkode: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresseIFrittFormat>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresseIFrittFormat {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "landkode" -> parsedValues.landkode = p.text
 
@@ -87,7 +88,6 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresseIFritt
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresseIFrittFormat(
                 landkode = parsedValues.landkode!!,
                 adresselinje = parsedValues.adresselinje,
@@ -95,8 +95,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresseIFritt
                 postkode = parsedValues.postkode,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

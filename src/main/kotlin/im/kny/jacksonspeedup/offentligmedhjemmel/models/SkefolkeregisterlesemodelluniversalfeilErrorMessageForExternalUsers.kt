@@ -21,55 +21,56 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param code 
  * @param feilreferanse 
  * @param httpStatus 
  * @param message 
  */
-data class SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers(
+
+data class SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers (
+
     @field:JsonProperty("code")
     val code: kotlin.String? = null,
+
     @field:JsonProperty("feilreferanse")
     val feilreferanse: kotlin.String? = null,
+
     @field:JsonProperty("httpStatus")
     val httpStatus: kotlin.Int? = null,
+
     @field:JsonProperty("message")
     val message: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var code: kotlin.String? = null
         var feilreferanse: kotlin.String? = null
         var httpStatus: kotlin.Int? = null
         var message: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "code" -> parsedValues.code = p.text
@@ -81,7 +82,6 @@ data class SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers(
                 }
                 curr = p.nextToken()
             }
-
             return SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers(
                 code = parsedValues.code,
                 feilreferanse = parsedValues.feilreferanse,
@@ -89,8 +89,9 @@ data class SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers(
                 message = parsedValues.message,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

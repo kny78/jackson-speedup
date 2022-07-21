@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param antattOppholdsvarighet 
  * @param startdato 
  * @param aarsak 
@@ -45,42 +45,57 @@ import java.time.format.*
  * @param opphoerstidspunkt 
  * @param sluttdato 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard (
+
     @field:JsonProperty("antattOppholdsvarighet")
     val antattOppholdsvarighet: Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard.AntattOppholdsvarighet,
+
     @field:JsonProperty("startdato")
     val startdato: java.time.LocalDate,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("antallTidligereOpphold")
     val antallTidligereOpphold: kotlin.Long? = null,
+
     @field:JsonProperty("erGjeldende")
     val erGjeldende: kotlin.Boolean? = null,
+
     @field:JsonProperty("fraflyttingskommunenummer")
     val fraflyttingskommunenummer: kotlin.String? = null,
+
     @field:JsonProperty("fraflyttingsland")
     val fraflyttingsland: kotlin.String? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("sluttdato")
     val sluttdato: java.time.LocalDate? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: underSeksMaaneder,overSeksMaaneder,overTolvMaaneder,ukjent
-    */
-    enum class AntattOppholdsvarighet(val value: kotlin.String){
-        underSeksMaaneder("underSeksMaaneder"),
-        overSeksMaaneder("overSeksMaaneder"),
-        overTolvMaaneder("overTolvMaaneder"),
-        ukjent("ukjent");
+     * 
+     *
+     * Values: underSeksMaaneder,overSeksMaaneder,overTolvMaaneder,ukjent
+     */
+    enum class AntattOppholdsvarighet(val value: kotlin.String) {
+        @JsonProperty(value = "underSeksMaaneder") underSeksMaaneder("underSeksMaaneder"),
+        @JsonProperty(value = "overSeksMaaneder") overSeksMaaneder("overSeksMaaneder"),
+        @JsonProperty(value = "overTolvMaaneder") overTolvMaaneder("overTolvMaaneder"),
+        @JsonProperty(value = "ukjent") ukjent("ukjent");
     }
     class ParsedValues{
         var antattOppholdsvarighet: Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard.AntattOppholdsvarighet? = null
@@ -96,43 +111,37 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard(
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
         var sluttdato: java.time.LocalDate? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "antattOppholdsvarighet" -> parsedValues.antattOppholdsvarighet = Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard.AntattOppholdsvarighet.valueOf(p.text)
-                    "startdato" -> parsedValues.startdato = LocalDate.parse(p.text)
+                    "startdato" -> parsedValues.startdato = java.time.LocalDate.parse(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "antallTidligereOpphold" -> parsedValues.antallTidligereOpphold = p.text.toLong()
                     "erGjeldende" -> parsedValues.erGjeldende = p.text.toBoolean()
                     "fraflyttingskommunenummer" -> parsedValues.fraflyttingskommunenummer = p.text
                     "fraflyttingsland" -> parsedValues.fraflyttingsland = p.text
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
-                    "sluttdato" -> parsedValues.sluttdato = LocalDate.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "sluttdato" -> parsedValues.sluttdato = java.time.LocalDate.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard(
                 antattOppholdsvarighet = parsedValues.antattOppholdsvarighet!!,
                 startdato = parsedValues.startdato!!,
@@ -148,8 +157,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard(
                 sluttdato = parsedValues.sluttdato,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

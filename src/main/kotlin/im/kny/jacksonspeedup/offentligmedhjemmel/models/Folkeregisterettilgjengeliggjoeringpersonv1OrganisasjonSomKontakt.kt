@@ -22,51 +22,51 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Personnavn
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param organisasjonsnavn 
  * @param kontaktpersonnavn 
  * @param organisasjonsnummer 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1OrganisasjonSomKontakt(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1OrganisasjonSomKontakt (
+
     @field:JsonProperty("organisasjonsnavn")
     val organisasjonsnavn: kotlin.String,
+
     @field:JsonProperty("kontaktpersonnavn")
     val kontaktpersonnavn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn? = null,
+
     @field:JsonProperty("organisasjonsnummer")
     val organisasjonsnummer: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var organisasjonsnavn: kotlin.String? = null
         var kontaktpersonnavn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn? = null
         var organisasjonsnummer: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1OrganisasjonSomKontakt>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1OrganisasjonSomKontakt {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "organisasjonsnavn" -> parsedValues.organisasjonsnavn = p.text
 
@@ -77,15 +77,15 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1OrganisasjonSomKontakt(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1OrganisasjonSomKontakt(
                 organisasjonsnavn = parsedValues.organisasjonsnavn!!,
                 kontaktpersonnavn = parsedValues.kontaktpersonnavn,
                 organisasjonsnummer = parsedValues.organisasjonsnummer,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

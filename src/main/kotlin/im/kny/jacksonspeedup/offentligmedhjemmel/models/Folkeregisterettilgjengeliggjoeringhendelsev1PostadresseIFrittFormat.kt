@@ -22,47 +22,46 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1Poststed
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adresselinje 
  * @param poststed 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1PostadresseIFrittFormat(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1PostadresseIFrittFormat (
+
     @field:JsonProperty("adresselinje")
     val adresselinje: kotlin.collections.List<kotlin.String>? = null,
+
     @field:JsonProperty("poststed")
     val poststed: Folkeregisterettilgjengeliggjoeringhendelsev1Poststed? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var adresselinje: List<kotlin.String>? = null
         var poststed: Folkeregisterettilgjengeliggjoeringhendelsev1Poststed? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1PostadresseIFrittFormat>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1PostadresseIFrittFormat {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "adresselinje" -> {
@@ -78,14 +77,14 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1PostadresseIFrittFormat(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1PostadresseIFrittFormat(
                 adresselinje = parsedValues.adresselinje,
                 poststed = parsedValues.poststed,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

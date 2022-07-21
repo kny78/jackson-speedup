@@ -22,51 +22,51 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Poststed
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param postboks 
  * @param postbokseier 
  * @param poststed 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Postboksadresse(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Postboksadresse (
+
     @field:JsonProperty("postboks")
     val postboks: kotlin.String,
+
     @field:JsonProperty("postbokseier")
     val postbokseier: kotlin.String? = null,
+
     @field:JsonProperty("poststed")
     val poststed: Folkeregisterettilgjengeliggjoeringpersonv1Poststed? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var postboks: kotlin.String? = null
         var postbokseier: kotlin.String? = null
         var poststed: Folkeregisterettilgjengeliggjoeringpersonv1Poststed? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Postboksadresse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Postboksadresse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "postboks" -> parsedValues.postboks = p.text
 
@@ -77,15 +77,15 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Postboksadresse(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Postboksadresse(
                 postboks = parsedValues.postboks!!,
                 postbokseier = parsedValues.postbokseier,
                 poststed = parsedValues.poststed,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

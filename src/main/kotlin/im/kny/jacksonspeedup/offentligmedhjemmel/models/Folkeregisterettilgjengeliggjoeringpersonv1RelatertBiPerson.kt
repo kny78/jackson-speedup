@@ -22,40 +22,47 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Personnavn
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param navn 
  * @param foedselsdato 
  * @param kjoenn 
  * @param statsborgerskap 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson (
+
     @field:JsonProperty("navn")
     val navn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn,
+
     @field:JsonProperty("foedselsdato")
     val foedselsdato: java.time.LocalDate? = null,
+
     @field:JsonProperty("kjoenn")
     val kjoenn: Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson.Kjoenn? = null,
+
     @field:JsonProperty("statsborgerskap")
     val statsborgerskap: kotlin.String? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: kvinne,mann
-    */
-    enum class Kjoenn(val value: kotlin.String){
-        kvinne("kvinne"),
-        mann("mann");
+     * 
+     *
+     * Values: kvinne,mann
+     */
+    enum class Kjoenn(val value: kotlin.String) {
+        @JsonProperty(value = "kvinne") kvinne("kvinne"),
+        @JsonProperty(value = "mann") mann("mann");
     }
     class ParsedValues{
         var navn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn? = null
@@ -63,26 +70,21 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson(
         var kjoenn: Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson.Kjoenn? = null
         var statsborgerskap: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "navn" -> parsedValues.navn = Folkeregisterettilgjengeliggjoeringpersonv1Personnavn.deserializer.deserialize(p, ctx)
 
-                    "foedselsdato" -> parsedValues.foedselsdato = LocalDate.parse(p.text)
+                    "foedselsdato" -> parsedValues.foedselsdato = java.time.LocalDate.parse(p.text)
 
                     "kjoenn" -> parsedValues.kjoenn = Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson.Kjoenn.valueOf(p.text)
                     "statsborgerskap" -> parsedValues.statsborgerskap = p.text
@@ -91,7 +93,6 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson(
                 navn = parsedValues.navn!!,
                 foedselsdato = parsedValues.foedselsdato,
@@ -99,8 +100,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1RelatertBiPerson(
                 statsborgerskap = parsedValues.statsborgerskap,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

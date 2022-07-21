@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param graderingsnivaa 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -40,32 +40,42 @@ import java.time.format.*
  * @param kilde 
  * @param opphoerstidspunkt 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse (
+
     @field:JsonProperty("graderingsnivaa")
     val graderingsnivaa: Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse.Graderingsnivaa,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("erGjeldende")
     val erGjeldende: kotlin.Boolean? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: ugradert,klientadresse,fortrolig,strengtFortrolig
-    */
-    enum class Graderingsnivaa(val value: kotlin.String){
-        ugradert("ugradert"),
-        klientadresse("klientadresse"),
-        fortrolig("fortrolig"),
-        strengtFortrolig("strengtFortrolig");
+     * 
+     *
+     * Values: ugradert,klientadresse,fortrolig,strengtFortrolig
+     */
+    enum class Graderingsnivaa(val value: kotlin.String) {
+        @JsonProperty(value = "ugradert") ugradert("ugradert"),
+        @JsonProperty(value = "klientadresse") klientadresse("klientadresse"),
+        @JsonProperty(value = "fortrolig") fortrolig("fortrolig"),
+        @JsonProperty(value = "strengtFortrolig") strengtFortrolig("strengtFortrolig");
     }
     class ParsedValues{
         var graderingsnivaa: Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse.Graderingsnivaa? = null
@@ -76,38 +86,32 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse(
         var kilde: kotlin.String? = null
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "graderingsnivaa" -> parsedValues.graderingsnivaa = Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse.Graderingsnivaa.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "erGjeldende" -> parsedValues.erGjeldende = p.text.toBoolean()
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse(
                 graderingsnivaa = parsedValues.graderingsnivaa!!,
                 aarsak = parsedValues.aarsak,
@@ -118,8 +122,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse(
                 opphoerstidspunkt = parsedValues.opphoerstidspunkt,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

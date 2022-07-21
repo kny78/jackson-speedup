@@ -51,17 +51,17 @@ import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjenge
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param entitet 
  * @param entitetsendring 
  * @param adressebeskyttelse 
@@ -96,120 +96,157 @@ import java.time.format.*
  * @param utlendingsmyndighetenesIdentifikasjonsnummer 
  * @param vergemaalEllerFremtidsfullmakt 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata (
+
     @field:JsonProperty("entitet")
     val entitet: Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata.Entitet,
+
     @field:JsonProperty("entitetsendring")
     val entitetsendring: Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata.Entitetsendring,
+
     @field:JsonProperty("adressebeskyttelse")
     val adressebeskyttelse: Folkeregisterettilgjengeliggjoeringhendelsev1GraderingAvAdresse? = null,
+
     @field:JsonProperty("bibehold")
     val bibehold: Folkeregisterettilgjengeliggjoeringhendelsev1BibeholdAvNorskStatsborgerskap? = null,
+
     @field:JsonProperty("bostedsadresse")
     val bostedsadresse: Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse? = null,
+
     @field:JsonProperty("brukAvSamiskSpraak")
     val brukAvSamiskSpraak: Folkeregisterettilgjengeliggjoeringhendelsev1SamiskSpraak? = null,
+
     @field:JsonProperty("deltBosted")
     val deltBosted: Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted? = null,
+
     @field:JsonProperty("doedsfall")
     val doedsfall: Folkeregisterettilgjengeliggjoeringhendelsev1Doedsfall? = null,
+
     @field:JsonProperty("falskIdentitet")
     val falskIdentitet: Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet? = null,
+
     @field:JsonProperty("familierelasjon")
     val familierelasjon: Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon? = null,
+
     @field:JsonProperty("foedsel")
     val foedsel: Folkeregisterettilgjengeliggjoeringhendelsev1Foedsel? = null,
+
     @field:JsonProperty("foedselINorge")
     val foedselINorge: Folkeregisterettilgjengeliggjoeringhendelsev1FoedselINorge? = null,
+
     @field:JsonProperty("foreldreansvar")
     val foreldreansvar: Folkeregisterettilgjengeliggjoeringhendelsev1Foreldreansvar? = null,
+
     @field:JsonProperty("forholdTilSametingetsValgmanntall")
     val forholdTilSametingetsValgmanntall: Folkeregisterettilgjengeliggjoeringhendelsev1SametingetsValgmanntall? = null,
+
     @field:JsonProperty("identifikasjonsnummer")
     val identifikasjonsnummer: Folkeregisterettilgjengeliggjoeringhendelsev1Folkeregisteridentifikator? = null,
+
     @field:JsonProperty("identitetsgrunnlag")
     val identitetsgrunnlag: Folkeregisterettilgjengeliggjoeringhendelsev1Identitetsgrunnlag? = null,
+
     @field:JsonProperty("innflytting")
     val innflytting: Folkeregisterettilgjengeliggjoeringhendelsev1InnflyttingTilNorge? = null,
+
     @field:JsonProperty("kjoenn")
     val kjoenn: Folkeregisterettilgjengeliggjoeringhendelsev1Personkjoenn? = null,
+
     @field:JsonProperty("kontaktinformasjonForDoedsbo")
     val kontaktinformasjonForDoedsbo: Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo? = null,
+
     @field:JsonProperty("legitimasjonsdokument")
     val legitimasjonsdokument: Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument? = null,
+
     @field:JsonProperty("navn")
     val navn: Folkeregisterettilgjengeliggjoeringhendelsev1Folkeregisterpersonnavn? = null,
+
     @field:JsonProperty("opphold")
     val opphold: Folkeregisterettilgjengeliggjoeringhendelsev1Opphold? = null,
+
     @field:JsonProperty("oppholdPaaSvalbard")
     val oppholdPaaSvalbard: Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard? = null,
+
     @field:JsonProperty("oppholdsadresse")
     val oppholdsadresse: Folkeregisterettilgjengeliggjoeringhendelsev1Oppholdsadresse? = null,
+
     @field:JsonProperty("postadresse")
     val postadresse: Folkeregisterettilgjengeliggjoeringhendelsev1Kontaktadresse? = null,
+
     @field:JsonProperty("postadresseIUtlandet")
     val postadresseIUtlandet: Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseIUtlandet? = null,
+
     @field:JsonProperty("sivilstand")
     val sivilstand: Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand? = null,
+
     @field:JsonProperty("statsborgerskap")
     val statsborgerskap: Folkeregisterettilgjengeliggjoeringhendelsev1Statsborgerskap? = null,
+
     @field:JsonProperty("status")
     val status: Folkeregisterettilgjengeliggjoeringhendelsev1Folkeregisterpersonstatus? = null,
+
     @field:JsonProperty("utenlandskPersonidentifikasjon")
     val utenlandskPersonidentifikasjon: Folkeregisterettilgjengeliggjoeringhendelsev1Personidentifikasjon? = null,
+
     @field:JsonProperty("utflytting")
     val utflytting: Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge? = null,
+
     @field:JsonProperty("utlendingsmyndighetenesIdentifikasjonsnummer")
     val utlendingsmyndighetenesIdentifikasjonsnummer: Folkeregisterettilgjengeliggjoeringhendelsev1Personidentifikasjon? = null,
+
     @field:JsonProperty("vergemaalEllerFremtidsfullmakt")
     val vergemaalEllerFremtidsfullmakt: Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: falskIdentitet,identifikasjonsnummer,identitetsgrunnlag,utlendingsmyndighetenesIdentifikasjonsnummer,legitimasjonsdokument,utenlandskPersonidentifikasjon,kontaktinformasjonForDoedsbo,status,deltBosted,kjoenn,foedsel,foedselINorge,sivilstand,familierelasjon,doedsfall,navn,adressebeskyttelse,bostedsadresse,oppholdsadresse,innflytting,utflytting,brukAvSamiskSpraak,forholdTilSametingetsValgmanntall,kontaktadresse,kontaktadresseIUtlandet,foreldreansvar,statsborgerskap,bibehold,opphold,vergemaalEllerFremtidsfullmakt
-    */
-    enum class Entitet(val value: kotlin.String){
-        falskIdentitet("falskIdentitet"),
-        identifikasjonsnummer("identifikasjonsnummer"),
-        identitetsgrunnlag("identitetsgrunnlag"),
-        utlendingsmyndighetenesIdentifikasjonsnummer("utlendingsmyndighetenesIdentifikasjonsnummer"),
-        legitimasjonsdokument("legitimasjonsdokument"),
-        utenlandskPersonidentifikasjon("utenlandskPersonidentifikasjon"),
-        kontaktinformasjonForDoedsbo("kontaktinformasjonForDoedsbo"),
-        status("status"),
-        deltBosted("deltBosted"),
-        kjoenn("kjoenn"),
-        foedsel("foedsel"),
-        foedselINorge("foedselINorge"),
-        sivilstand("sivilstand"),
-        familierelasjon("familierelasjon"),
-        doedsfall("doedsfall"),
-        navn("navn"),
-        adressebeskyttelse("adressebeskyttelse"),
-        bostedsadresse("bostedsadresse"),
-        oppholdsadresse("oppholdsadresse"),
-        innflytting("innflytting"),
-        utflytting("utflytting"),
-        brukAvSamiskSpraak("brukAvSamiskSpraak"),
-        forholdTilSametingetsValgmanntall("forholdTilSametingetsValgmanntall"),
-        kontaktadresse("kontaktadresse"),
-        kontaktadresseIUtlandet("kontaktadresseIUtlandet"),
-        foreldreansvar("foreldreansvar"),
-        statsborgerskap("statsborgerskap"),
-        bibehold("bibehold"),
-        opphold("opphold"),
-        vergemaalEllerFremtidsfullmakt("vergemaalEllerFremtidsfullmakt");
+     * 
+     *
+     * Values: falskIdentitet,identifikasjonsnummer,identitetsgrunnlag,utlendingsmyndighetenesIdentifikasjonsnummer,legitimasjonsdokument,utenlandskPersonidentifikasjon,kontaktinformasjonForDoedsbo,status,deltBosted,kjoenn,foedsel,foedselINorge,sivilstand,familierelasjon,doedsfall,navn,adressebeskyttelse,bostedsadresse,oppholdsadresse,innflytting,utflytting,brukAvSamiskSpraak,forholdTilSametingetsValgmanntall,kontaktadresse,kontaktadresseIUtlandet,foreldreansvar,statsborgerskap,bibehold,opphold,vergemaalEllerFremtidsfullmakt
+     */
+    enum class Entitet(val value: kotlin.String) {
+        @JsonProperty(value = "falskIdentitet") falskIdentitet("falskIdentitet"),
+        @JsonProperty(value = "identifikasjonsnummer") identifikasjonsnummer("identifikasjonsnummer"),
+        @JsonProperty(value = "identitetsgrunnlag") identitetsgrunnlag("identitetsgrunnlag"),
+        @JsonProperty(value = "utlendingsmyndighetenesIdentifikasjonsnummer") utlendingsmyndighetenesIdentifikasjonsnummer("utlendingsmyndighetenesIdentifikasjonsnummer"),
+        @JsonProperty(value = "legitimasjonsdokument") legitimasjonsdokument("legitimasjonsdokument"),
+        @JsonProperty(value = "utenlandskPersonidentifikasjon") utenlandskPersonidentifikasjon("utenlandskPersonidentifikasjon"),
+        @JsonProperty(value = "kontaktinformasjonForDoedsbo") kontaktinformasjonForDoedsbo("kontaktinformasjonForDoedsbo"),
+        @JsonProperty(value = "status") status("status"),
+        @JsonProperty(value = "deltBosted") deltBosted("deltBosted"),
+        @JsonProperty(value = "kjoenn") kjoenn("kjoenn"),
+        @JsonProperty(value = "foedsel") foedsel("foedsel"),
+        @JsonProperty(value = "foedselINorge") foedselINorge("foedselINorge"),
+        @JsonProperty(value = "sivilstand") sivilstand("sivilstand"),
+        @JsonProperty(value = "familierelasjon") familierelasjon("familierelasjon"),
+        @JsonProperty(value = "doedsfall") doedsfall("doedsfall"),
+        @JsonProperty(value = "navn") navn("navn"),
+        @JsonProperty(value = "adressebeskyttelse") adressebeskyttelse("adressebeskyttelse"),
+        @JsonProperty(value = "bostedsadresse") bostedsadresse("bostedsadresse"),
+        @JsonProperty(value = "oppholdsadresse") oppholdsadresse("oppholdsadresse"),
+        @JsonProperty(value = "innflytting") innflytting("innflytting"),
+        @JsonProperty(value = "utflytting") utflytting("utflytting"),
+        @JsonProperty(value = "brukAvSamiskSpraak") brukAvSamiskSpraak("brukAvSamiskSpraak"),
+        @JsonProperty(value = "forholdTilSametingetsValgmanntall") forholdTilSametingetsValgmanntall("forholdTilSametingetsValgmanntall"),
+        @JsonProperty(value = "kontaktadresse") kontaktadresse("kontaktadresse"),
+        @JsonProperty(value = "kontaktadresseIUtlandet") kontaktadresseIUtlandet("kontaktadresseIUtlandet"),
+        @JsonProperty(value = "foreldreansvar") foreldreansvar("foreldreansvar"),
+        @JsonProperty(value = "statsborgerskap") statsborgerskap("statsborgerskap"),
+        @JsonProperty(value = "bibehold") bibehold("bibehold"),
+        @JsonProperty(value = "opphold") opphold("opphold"),
+        @JsonProperty(value = "vergemaalEllerFremtidsfullmakt") vergemaalEllerFremtidsfullmakt("vergemaalEllerFremtidsfullmakt");
     }
     /**
-    * 
-    * Values: registrereNy,korrigere,annullere,korrigereHistorisk
-    */
-    enum class Entitetsendring(val value: kotlin.String){
-        registrereNy("registrereNy"),
-        korrigere("korrigere"),
-        annullere("annullere"),
-        korrigereHistorisk("korrigereHistorisk");
+     * 
+     *
+     * Values: registrereNy,korrigere,annullere,korrigereHistorisk
+     */
+    enum class Entitetsendring(val value: kotlin.String) {
+        @JsonProperty(value = "registrereNy") registrereNy("registrereNy"),
+        @JsonProperty(value = "korrigere") korrigere("korrigere"),
+        @JsonProperty(value = "annullere") annullere("annullere"),
+        @JsonProperty(value = "korrigereHistorisk") korrigereHistorisk("korrigereHistorisk");
     }
     class ParsedValues{
         var entitet: Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata.Entitet? = null
@@ -246,22 +283,17 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata(
         var utlendingsmyndighetenesIdentifikasjonsnummer: Folkeregisterettilgjengeliggjoeringhendelsev1Personidentifikasjon? = null
         var vergemaalEllerFremtidsfullmakt: Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "entitet" -> parsedValues.entitet = Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata.Entitet.valueOf(p.text)
@@ -304,7 +336,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata(
                 entitet = parsedValues.entitet!!,
                 entitetsendring = parsedValues.entitetsendring!!,
@@ -341,8 +372,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata(
                 vergemaalEllerFremtidsfullmakt = parsedValues.vergemaalEllerFremtidsfullmakt,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

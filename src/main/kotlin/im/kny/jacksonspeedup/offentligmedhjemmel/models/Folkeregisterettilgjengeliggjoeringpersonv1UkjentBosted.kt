@@ -21,43 +21,41 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param bostedskommune 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1UkjentBosted(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1UkjentBosted (
+
     @field:JsonProperty("bostedskommune")
     val bostedskommune: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var bostedskommune: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1UkjentBosted>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1UkjentBosted {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "bostedskommune" -> parsedValues.bostedskommune = p.text
@@ -66,13 +64,13 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1UkjentBosted(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1UkjentBosted(
                 bostedskommune = parsedValues.bostedskommune,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

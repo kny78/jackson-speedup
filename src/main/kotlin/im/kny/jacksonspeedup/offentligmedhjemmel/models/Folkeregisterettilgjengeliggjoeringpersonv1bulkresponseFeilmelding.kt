@@ -21,43 +21,41 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param feilmelding 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding (
+
     @field:JsonProperty("feilmelding")
     val feilmelding: kotlin.String
-) 
-{
+
+) {
+
     class ParsedValues{
         var feilmelding: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "feilmelding" -> parsedValues.feilmelding = p.text
 
@@ -66,13 +64,13 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding(
                 feilmelding = parsedValues.feilmelding!!,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

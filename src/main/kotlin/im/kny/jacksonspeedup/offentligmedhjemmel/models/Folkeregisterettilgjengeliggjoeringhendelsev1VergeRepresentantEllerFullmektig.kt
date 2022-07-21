@@ -22,42 +22,49 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param foedselsEllerDNummer 
  * @param navn 
  * @param omfang 
  * @param omfangetErInnenPersonligOmraade 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig (
+
     @field:JsonProperty("foedselsEllerDNummer")
     val foedselsEllerDNummer: kotlin.String? = null,
+
     @field:JsonProperty("navn")
     val navn: Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn? = null,
+
     @field:JsonProperty("omfang")
     val omfang: Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig.Omfang? = null,
+
     @field:JsonProperty("omfangetErInnenPersonligOmraade")
     val omfangetErInnenPersonligOmraade: kotlin.Boolean? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: utlendingssakerPersonligeOgOekonomiskeInteresser,personligeOgOekonomiskeInteresser,oekonomiskeInteresser,personligeInteresser
-    */
-    enum class Omfang(val value: kotlin.String){
-        utlendingssakerPersonligeOgOekonomiskeInteresser("utlendingssakerPersonligeOgOekonomiskeInteresser"),
-        personligeOgOekonomiskeInteresser("personligeOgOekonomiskeInteresser"),
-        oekonomiskeInteresser("oekonomiskeInteresser"),
-        personligeInteresser("personligeInteresser");
+     * 
+     *
+     * Values: utlendingssakerPersonligeOgOekonomiskeInteresser,personligeOgOekonomiskeInteresser,oekonomiskeInteresser,personligeInteresser
+     */
+    enum class Omfang(val value: kotlin.String) {
+        @JsonProperty(value = "utlendingssakerPersonligeOgOekonomiskeInteresser") utlendingssakerPersonligeOgOekonomiskeInteresser("utlendingssakerPersonligeOgOekonomiskeInteresser"),
+        @JsonProperty(value = "personligeOgOekonomiskeInteresser") personligeOgOekonomiskeInteresser("personligeOgOekonomiskeInteresser"),
+        @JsonProperty(value = "oekonomiskeInteresser") oekonomiskeInteresser("oekonomiskeInteresser"),
+        @JsonProperty(value = "personligeInteresser") personligeInteresser("personligeInteresser");
     }
     class ParsedValues{
         var foedselsEllerDNummer: kotlin.String? = null
@@ -65,22 +72,17 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFu
         var omfang: Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig.Omfang? = null
         var omfangetErInnenPersonligOmraade: kotlin.Boolean? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "foedselsEllerDNummer" -> parsedValues.foedselsEllerDNummer = p.text
@@ -93,7 +95,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFu
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig(
                 foedselsEllerDNummer = parsedValues.foedselsEllerDNummer,
                 navn = parsedValues.navn,
@@ -101,8 +102,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFu
                 omfangetErInnenPersonligOmraade = parsedValues.omfangetErInnenPersonligOmraade,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

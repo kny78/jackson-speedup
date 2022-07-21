@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param kjoenn 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -40,30 +40,40 @@ import java.time.format.*
  * @param kilde 
  * @param opphoerstidspunkt 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn (
+
     @field:JsonProperty("kjoenn")
     val kjoenn: Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn.Kjoenn,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("erGjeldende")
     val erGjeldende: kotlin.Boolean? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: kvinne,mann
-    */
-    enum class Kjoenn(val value: kotlin.String){
-        kvinne("kvinne"),
-        mann("mann");
+     * 
+     *
+     * Values: kvinne,mann
+     */
+    enum class Kjoenn(val value: kotlin.String) {
+        @JsonProperty(value = "kvinne") kvinne("kvinne"),
+        @JsonProperty(value = "mann") mann("mann");
     }
     class ParsedValues{
         var kjoenn: Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn.Kjoenn? = null
@@ -74,38 +84,32 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn(
         var kilde: kotlin.String? = null
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "kjoenn" -> parsedValues.kjoenn = Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn.Kjoenn.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "erGjeldende" -> parsedValues.erGjeldende = p.text.toBoolean()
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn(
                 kjoenn = parsedValues.kjoenn!!,
                 aarsak = parsedValues.aarsak,
@@ -116,8 +120,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn(
                 opphoerstidspunkt = parsedValues.opphoerstidspunkt,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

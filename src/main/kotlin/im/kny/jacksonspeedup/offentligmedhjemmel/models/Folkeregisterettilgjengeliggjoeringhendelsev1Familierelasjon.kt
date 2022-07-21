@@ -22,17 +22,17 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1RelatertBiPerson
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param relatertPersonsRolle 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -43,52 +43,65 @@ import java.time.format.*
  * @param relatertPerson 
  * @param relatertPersonUtenFolkeregisteridentifikator 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon (
+
     @field:JsonProperty("relatertPersonsRolle")
     val relatertPersonsRolle: Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon.RelatertPersonsRolle,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("minRolleForPerson")
     val minRolleForPerson: Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon.MinRolleForPerson? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("relatertPerson")
     val relatertPerson: kotlin.String? = null,
+
     @field:JsonProperty("relatertPersonUtenFolkeregisteridentifikator")
     val relatertPersonUtenFolkeregisteridentifikator: Folkeregisterettilgjengeliggjoeringhendelsev1RelatertBiPerson? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: mor,far,medmor,barn,soesken,ektefelleEllerPartner,doedfoedtBarn
-    */
-    enum class RelatertPersonsRolle(val value: kotlin.String){
-        mor("mor"),
-        far("far"),
-        medmor("medmor"),
-        barn("barn"),
-        soesken("soesken"),
-        ektefelleEllerPartner("ektefelleEllerPartner"),
-        doedfoedtBarn("doedfoedtBarn");
+     * 
+     *
+     * Values: mor,far,medmor,barn,soesken,ektefelleEllerPartner,doedfoedtBarn
+     */
+    enum class RelatertPersonsRolle(val value: kotlin.String) {
+        @JsonProperty(value = "mor") mor("mor"),
+        @JsonProperty(value = "far") far("far"),
+        @JsonProperty(value = "medmor") medmor("medmor"),
+        @JsonProperty(value = "barn") barn("barn"),
+        @JsonProperty(value = "soesken") soesken("soesken"),
+        @JsonProperty(value = "ektefelleEllerPartner") ektefelleEllerPartner("ektefelleEllerPartner"),
+        @JsonProperty(value = "doedfoedtBarn") doedfoedtBarn("doedfoedtBarn");
     }
     /**
-    * 
-    * Values: mor,far,medmor,barn,soesken,ektefelleEllerPartner,doedfoedtBarn
-    */
-    enum class MinRolleForPerson(val value: kotlin.String){
-        mor("mor"),
-        far("far"),
-        medmor("medmor"),
-        barn("barn"),
-        soesken("soesken"),
-        ektefelleEllerPartner("ektefelleEllerPartner"),
-        doedfoedtBarn("doedfoedtBarn");
+     * 
+     *
+     * Values: mor,far,medmor,barn,soesken,ektefelleEllerPartner,doedfoedtBarn
+     */
+    enum class MinRolleForPerson(val value: kotlin.String) {
+        @JsonProperty(value = "mor") mor("mor"),
+        @JsonProperty(value = "far") far("far"),
+        @JsonProperty(value = "medmor") medmor("medmor"),
+        @JsonProperty(value = "barn") barn("barn"),
+        @JsonProperty(value = "soesken") soesken("soesken"),
+        @JsonProperty(value = "ektefelleEllerPartner") ektefelleEllerPartner("ektefelleEllerPartner"),
+        @JsonProperty(value = "doedfoedtBarn") doedfoedtBarn("doedfoedtBarn");
     }
     class ParsedValues{
         var relatertPersonsRolle: Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon.RelatertPersonsRolle? = null
@@ -101,33 +114,28 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon(
         var relatertPerson: kotlin.String? = null
         var relatertPersonUtenFolkeregisteridentifikator: Folkeregisterettilgjengeliggjoeringhendelsev1RelatertBiPerson? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "relatertPersonsRolle" -> parsedValues.relatertPersonsRolle = Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon.RelatertPersonsRolle.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
 
                     "minRolleForPerson" -> parsedValues.minRolleForPerson = Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon.MinRolleForPerson.valueOf(p.text)
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "relatertPerson" -> parsedValues.relatertPerson = p.text
                     "relatertPersonUtenFolkeregisteridentifikator" -> parsedValues.relatertPersonUtenFolkeregisteridentifikator = Folkeregisterettilgjengeliggjoeringhendelsev1RelatertBiPerson.deserializer.deserialize(p, ctx)
 
@@ -135,7 +143,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon(
                 relatertPersonsRolle = parsedValues.relatertPersonsRolle!!,
                 aarsak = parsedValues.aarsak,
@@ -148,8 +155,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Familierelasjon(
                 relatertPersonUtenFolkeregisteridentifikator = parsedValues.relatertPersonUtenFolkeregisteridentifikator,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

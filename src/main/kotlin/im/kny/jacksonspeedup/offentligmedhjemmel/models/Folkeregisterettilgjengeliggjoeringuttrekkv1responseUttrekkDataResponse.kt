@@ -21,51 +21,51 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param dokumentidentifikator 
  * @param feilmelding 
  * @param foedselsEllerDNummer 
  */
-data class Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkDataResponse(
+
+data class Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkDataResponse (
+
     @field:JsonProperty("dokumentidentifikator")
     val dokumentidentifikator: kotlin.collections.List<kotlin.String>? = null,
+
     @field:JsonProperty("feilmelding")
     val feilmelding: kotlin.String? = null,
+
     @field:JsonProperty("foedselsEllerDNummer")
     val foedselsEllerDNummer: kotlin.collections.List<kotlin.String>? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var dokumentidentifikator: List<kotlin.String>? = null
         var feilmelding: kotlin.String? = null
         var foedselsEllerDNummer: List<kotlin.String>? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkDataResponse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkDataResponse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "dokumentidentifikator" -> {
@@ -88,15 +88,15 @@ data class Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkDataRespon
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkDataResponse(
                 dokumentidentifikator = parsedValues.dokumentidentifikator,
                 feilmelding = parsedValues.feilmelding,
                 foedselsEllerDNummer = parsedValues.foedselsEllerDNummer,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

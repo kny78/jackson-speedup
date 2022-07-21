@@ -22,43 +22,41 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param oppslag 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponsePersonBulkoppslagResponse(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponsePersonBulkoppslagResponse (
+
     @field:JsonProperty("oppslag")
     val oppslag: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag>? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var oppslag: List<Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag>? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1bulkresponsePersonBulkoppslagResponse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1bulkresponsePersonBulkoppslagResponse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "oppslag" -> {
@@ -73,13 +71,13 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponsePersonBulkopps
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1bulkresponsePersonBulkoppslagResponse(
                 oppslag = parsedValues.oppslag,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

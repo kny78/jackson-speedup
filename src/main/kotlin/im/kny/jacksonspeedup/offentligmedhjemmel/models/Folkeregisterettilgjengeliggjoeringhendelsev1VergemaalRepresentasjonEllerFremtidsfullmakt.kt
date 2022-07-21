@@ -22,17 +22,17 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param verge 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -42,38 +42,49 @@ import java.time.format.*
  * @param opphoerstidspunkt 
  * @param vergemaaltype 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt (
+
     @field:JsonProperty("verge")
     val verge: Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("embete")
     val embete: kotlin.String? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("vergemaaltype")
     val vergemaaltype: Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt.Vergemaaltype? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: ensligMindreaarigAsylsoeker,ensligMindreaarigFlyktning,voksen,midlertidigForVoksen,mindreaarig,midlertidigForMindreaarig,forvaltningUtenforVergemaal,stadfestetFremtidsfullmakt
-    */
-    enum class Vergemaaltype(val value: kotlin.String){
-        ensligMindreaarigAsylsoeker("ensligMindreaarigAsylsoeker"),
-        ensligMindreaarigFlyktning("ensligMindreaarigFlyktning"),
-        voksen("voksen"),
-        midlertidigForVoksen("midlertidigForVoksen"),
-        mindreaarig("mindreaarig"),
-        midlertidigForMindreaarig("midlertidigForMindreaarig"),
-        forvaltningUtenforVergemaal("forvaltningUtenforVergemaal"),
-        stadfestetFremtidsfullmakt("stadfestetFremtidsfullmakt");
+     * 
+     *
+     * Values: ensligMindreaarigAsylsoeker,ensligMindreaarigFlyktning,voksen,midlertidigForVoksen,mindreaarig,midlertidigForMindreaarig,forvaltningUtenforVergemaal,stadfestetFremtidsfullmakt
+     */
+    enum class Vergemaaltype(val value: kotlin.String) {
+        @JsonProperty(value = "ensligMindreaarigAsylsoeker") ensligMindreaarigAsylsoeker("ensligMindreaarigAsylsoeker"),
+        @JsonProperty(value = "ensligMindreaarigFlyktning") ensligMindreaarigFlyktning("ensligMindreaarigFlyktning"),
+        @JsonProperty(value = "voksen") voksen("voksen"),
+        @JsonProperty(value = "midlertidigForVoksen") midlertidigForVoksen("midlertidigForVoksen"),
+        @JsonProperty(value = "mindreaarig") mindreaarig("mindreaarig"),
+        @JsonProperty(value = "midlertidigForMindreaarig") midlertidigForMindreaarig("midlertidigForMindreaarig"),
+        @JsonProperty(value = "forvaltningUtenforVergemaal") forvaltningUtenforVergemaal("forvaltningUtenforVergemaal"),
+        @JsonProperty(value = "stadfestetFremtidsfullmakt") stadfestetFremtidsfullmakt("stadfestetFremtidsfullmakt");
     }
     class ParsedValues{
         var verge: Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig? = null
@@ -85,31 +96,26 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonE
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
         var vergemaaltype: Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt.Vergemaaltype? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "verge" -> parsedValues.verge = Folkeregisterettilgjengeliggjoeringhendelsev1VergeRepresentantEllerFullmektig.deserializer.deserialize(p, ctx)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "embete" -> parsedValues.embete = p.text
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
 
                     "vergemaaltype" -> parsedValues.vergemaaltype = Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt.Vergemaaltype.valueOf(p.text)
 
@@ -117,7 +123,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonE
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt(
                 verge = parsedValues.verge!!,
                 aarsak = parsedValues.aarsak,
@@ -129,8 +134,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonE
                 vergemaaltype = parsedValues.vergemaaltype,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

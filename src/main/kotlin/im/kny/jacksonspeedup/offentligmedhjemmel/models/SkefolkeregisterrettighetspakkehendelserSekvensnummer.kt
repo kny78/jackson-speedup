@@ -21,43 +21,41 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param sekvensnummer 
  */
-data class SkefolkeregisterrettighetspakkehendelserSekvensnummer(
+
+data class SkefolkeregisterrettighetspakkehendelserSekvensnummer (
+
     @field:JsonProperty("sekvensnummer")
     val sekvensnummer: kotlin.Long? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var sekvensnummer: kotlin.Long? = null
     }
-
     class Deserializer : JsonDeserializer<SkefolkeregisterrettighetspakkehendelserSekvensnummer>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterrettighetspakkehendelserSekvensnummer {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "sekvensnummer" -> parsedValues.sekvensnummer = p.text.toLong()
@@ -66,13 +64,13 @@ data class SkefolkeregisterrettighetspakkehendelserSekvensnummer(
                 }
                 curr = p.nextToken()
             }
-
             return SkefolkeregisterrettighetspakkehendelserSekvensnummer(
                 sekvensnummer = parsedValues.sekvensnummer,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

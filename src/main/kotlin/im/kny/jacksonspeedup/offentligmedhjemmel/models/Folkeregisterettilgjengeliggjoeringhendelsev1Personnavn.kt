@@ -21,51 +21,51 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param etternavn 
  * @param fornavn 
  * @param mellomnavn 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn (
+
     @field:JsonProperty("etternavn")
     val etternavn: kotlin.String,
+
     @field:JsonProperty("fornavn")
     val fornavn: kotlin.String,
+
     @field:JsonProperty("mellomnavn")
     val mellomnavn: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var etternavn: kotlin.String? = null
         var fornavn: kotlin.String? = null
         var mellomnavn: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "etternavn" -> parsedValues.etternavn = p.text
                     "fornavn" -> parsedValues.fornavn = p.text
@@ -76,15 +76,15 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn(
                 etternavn = parsedValues.etternavn!!,
                 fornavn = parsedValues.fornavn!!,
                 mellomnavn = parsedValues.mellomnavn,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

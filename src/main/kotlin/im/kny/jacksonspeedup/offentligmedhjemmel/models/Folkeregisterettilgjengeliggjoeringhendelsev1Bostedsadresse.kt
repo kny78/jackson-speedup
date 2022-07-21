@@ -24,17 +24,17 @@ import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjenge
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1Vegadresse
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adressegradering 
  * @param aarsak 
  * @param adresseIdentifikatorFraMatrikkelen 
@@ -52,50 +52,69 @@ import java.time.format.*
  * @param ukjentBosted 
  * @param vegadresse 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse (
+
     @field:JsonProperty("adressegradering")
     val adressegradering: Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse.Adressegradering,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("adresseIdentifikatorFraMatrikkelen")
     val adresseIdentifikatorFraMatrikkelen: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("flyttedato")
     val flyttedato: java.time.LocalDate? = null,
+
     @field:JsonProperty("grunnkrets")
     val grunnkrets: kotlin.Long? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("kirkekrets")
     val kirkekrets: kotlin.Long? = null,
+
     @field:JsonProperty("matrikkeladresse")
     val matrikkeladresse: Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkeladresse? = null,
+
     @field:JsonProperty("naerAdresseIdentifikatorFraMatrikkelen")
     val naerAdresseIdentifikatorFraMatrikkelen: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("skolekrets")
     val skolekrets: kotlin.Long? = null,
+
     @field:JsonProperty("stemmekrets")
     val stemmekrets: kotlin.Long? = null,
+
     @field:JsonProperty("ukjentBosted")
     val ukjentBosted: Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted? = null,
+
     @field:JsonProperty("vegadresse")
     val vegadresse: Folkeregisterettilgjengeliggjoeringhendelsev1Vegadresse? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: ugradert,klientadresse,fortrolig,strengtFortrolig
-    */
-    enum class Adressegradering(val value: kotlin.String){
-        ugradert("ugradert"),
-        klientadresse("klientadresse"),
-        fortrolig("fortrolig"),
-        strengtFortrolig("strengtFortrolig");
+     * 
+     *
+     * Values: ugradert,klientadresse,fortrolig,strengtFortrolig
+     */
+    enum class Adressegradering(val value: kotlin.String) {
+        @JsonProperty(value = "ugradert") ugradert("ugradert"),
+        @JsonProperty(value = "klientadresse") klientadresse("klientadresse"),
+        @JsonProperty(value = "fortrolig") fortrolig("fortrolig"),
+        @JsonProperty(value = "strengtFortrolig") strengtFortrolig("strengtFortrolig");
     }
     class ParsedValues{
         var adressegradering: Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse.Adressegradering? = null
@@ -115,37 +134,32 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse(
         var ukjentBosted: Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted? = null
         var vegadresse: Folkeregisterettilgjengeliggjoeringhendelsev1Vegadresse? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "adressegradering" -> parsedValues.adressegradering = Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse.Adressegradering.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
                     "adresseIdentifikatorFraMatrikkelen" -> parsedValues.adresseIdentifikatorFraMatrikkelen = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
-                    "flyttedato" -> parsedValues.flyttedato = LocalDate.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "flyttedato" -> parsedValues.flyttedato = java.time.LocalDate.parse(p.text)
                     "grunnkrets" -> parsedValues.grunnkrets = p.text.toLong()
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
                     "kirkekrets" -> parsedValues.kirkekrets = p.text.toLong()
                     "matrikkeladresse" -> parsedValues.matrikkeladresse = Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkeladresse.deserializer.deserialize(p, ctx)
                     "naerAdresseIdentifikatorFraMatrikkelen" -> parsedValues.naerAdresseIdentifikatorFraMatrikkelen = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "skolekrets" -> parsedValues.skolekrets = p.text.toLong()
                     "stemmekrets" -> parsedValues.stemmekrets = p.text.toLong()
                     "ukjentBosted" -> parsedValues.ukjentBosted = Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted.deserializer.deserialize(p, ctx)
@@ -155,7 +169,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse(
                 adressegradering = parsedValues.adressegradering!!,
                 aarsak = parsedValues.aarsak,
@@ -175,8 +188,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Bostedsadresse(
                 vegadresse = parsedValues.vegadresse,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

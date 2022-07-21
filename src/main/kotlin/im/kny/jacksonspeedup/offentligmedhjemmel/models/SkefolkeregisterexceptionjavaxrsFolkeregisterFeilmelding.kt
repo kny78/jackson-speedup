@@ -21,36 +21,43 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param alvorlighetsgrad 
  * @param feilkode 
  * @param feilmelding 
  * @param httpStatus 
  * @param tilleggsinformasjon 
  */
-data class SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding(
+
+data class SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding (
+
     @field:JsonProperty("alvorlighetsgrad")
     val alvorlighetsgrad: kotlin.String? = null,
+
     @field:JsonProperty("feilkode")
     val feilkode: kotlin.String? = null,
+
     @field:JsonProperty("feilmelding")
     val feilmelding: kotlin.String? = null,
+
     @field:JsonProperty("httpStatus")
     val httpStatus: kotlin.Int? = null,
+
     @field:JsonProperty("tilleggsinformasjon")
     val tilleggsinformasjon: kotlin.collections.Map<kotlin.String, kotlin.String>? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var alvorlighetsgrad: kotlin.String? = null
         var feilkode: kotlin.String? = null
@@ -58,22 +65,17 @@ data class SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding(
         var httpStatus: kotlin.Int? = null
         var tilleggsinformasjon: kotlin.collections.Map<kotlin.String, kotlin.String>? = null
     }
-
     class Deserializer : JsonDeserializer<SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "alvorlighetsgrad" -> parsedValues.alvorlighetsgrad = p.text
@@ -94,7 +96,6 @@ data class SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding(
                 }
                 curr = p.nextToken()
             }
-
             return SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding(
                 alvorlighetsgrad = parsedValues.alvorlighetsgrad,
                 feilkode = parsedValues.feilkode,
@@ -103,8 +104,9 @@ data class SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding(
                 tilleggsinformasjon = parsedValues.tilleggsinformasjon,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

@@ -22,47 +22,46 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param hendelse 
  * @param sekvensnummer 
  */
-data class SkefolkeregisterrettighetspakkehendelserLagretHendelseMedDokumentIdentifikatorer(
+
+data class SkefolkeregisterrettighetspakkehendelserLagretHendelseMedDokumentIdentifikatorer (
+
     @field:JsonProperty("hendelse")
     val hendelse: SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer? = null,
+
     @field:JsonProperty("sekvensnummer")
     val sekvensnummer: kotlin.Long? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var hendelse: SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer? = null
         var sekvensnummer: kotlin.Long? = null
     }
-
     class Deserializer : JsonDeserializer<SkefolkeregisterrettighetspakkehendelserLagretHendelseMedDokumentIdentifikatorer>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterrettighetspakkehendelserLagretHendelseMedDokumentIdentifikatorer {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "hendelse" -> parsedValues.hendelse = SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer.deserializer.deserialize(p, ctx)
@@ -72,14 +71,14 @@ data class SkefolkeregisterrettighetspakkehendelserLagretHendelseMedDokumentIden
                 }
                 curr = p.nextToken()
             }
-
             return SkefolkeregisterrettighetspakkehendelserLagretHendelseMedDokumentIdentifikatorer(
                 hendelse = parsedValues.hendelse,
                 sekvensnummer = parsedValues.sekvensnummer,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

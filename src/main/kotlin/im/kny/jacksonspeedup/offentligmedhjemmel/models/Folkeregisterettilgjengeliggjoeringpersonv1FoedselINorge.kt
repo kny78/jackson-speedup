@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param aarsak 
  * @param ajourholdstidspunkt 
  * @param erGjeldende 
@@ -41,25 +41,35 @@ import java.time.format.*
  * @param opphoerstidspunkt 
  * @param rekkefoelgenummer 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge (
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("erGjeldende")
     val erGjeldende: kotlin.Boolean? = null,
+
     @field:JsonProperty("foedselsinstitusjonsnavn")
     val foedselsinstitusjonsnavn: kotlin.String? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("rekkefoelgenummer")
     val rekkefoelgenummer: kotlin.Long? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var aarsak: kotlin.String? = null
         var ajourholdstidspunkt: java.time.OffsetDateTime? = null
@@ -70,38 +80,32 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge(
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
         var rekkefoelgenummer: kotlin.Long? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "erGjeldende" -> parsedValues.erGjeldende = p.text.toBoolean()
                     "foedselsinstitusjonsnavn" -> parsedValues.foedselsinstitusjonsnavn = p.text
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "rekkefoelgenummer" -> parsedValues.rekkefoelgenummer = p.text.toLong()
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge(
                 aarsak = parsedValues.aarsak,
                 ajourholdstidspunkt = parsedValues.ajourholdstidspunkt,
@@ -113,8 +117,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge(
                 rekkefoelgenummer = parsedValues.rekkefoelgenummer,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

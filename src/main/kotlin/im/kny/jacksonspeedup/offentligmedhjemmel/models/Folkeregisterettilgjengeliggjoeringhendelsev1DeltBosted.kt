@@ -24,17 +24,17 @@ import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjenge
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1Vegadresse
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adressegradering 
  * @param startdatoForKontrakt 
  * @param aarsak 
@@ -49,44 +49,60 @@ import java.time.format.*
  * @param ukjentBosted 
  * @param vegadresse 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted (
+
     @field:JsonProperty("adressegradering")
     val adressegradering: Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted.Adressegradering,
+
     @field:JsonProperty("startdatoForKontrakt")
     val startdatoForKontrakt: java.time.LocalDate,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("adresseIdentifikatorFraMatrikkelen")
     val adresseIdentifikatorFraMatrikkelen: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("matrikkeladresse")
     val matrikkeladresse: Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkeladresse? = null,
+
     @field:JsonProperty("naerAdresseIdentifikatorFraMatrikkelen")
     val naerAdresseIdentifikatorFraMatrikkelen: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("sluttdatoForKontrakt")
     val sluttdatoForKontrakt: java.time.LocalDate? = null,
+
     @field:JsonProperty("ukjentBosted")
     val ukjentBosted: Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted? = null,
+
     @field:JsonProperty("vegadresse")
     val vegadresse: Folkeregisterettilgjengeliggjoeringhendelsev1Vegadresse? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: ugradert,klientadresse,fortrolig,strengtFortrolig
-    */
-    enum class Adressegradering(val value: kotlin.String){
-        ugradert("ugradert"),
-        klientadresse("klientadresse"),
-        fortrolig("fortrolig"),
-        strengtFortrolig("strengtFortrolig");
+     * 
+     *
+     * Values: ugradert,klientadresse,fortrolig,strengtFortrolig
+     */
+    enum class Adressegradering(val value: kotlin.String) {
+        @JsonProperty(value = "ugradert") ugradert("ugradert"),
+        @JsonProperty(value = "klientadresse") klientadresse("klientadresse"),
+        @JsonProperty(value = "fortrolig") fortrolig("fortrolig"),
+        @JsonProperty(value = "strengtFortrolig") strengtFortrolig("strengtFortrolig");
     }
     class ParsedValues{
         var adressegradering: Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted.Adressegradering? = null
@@ -103,36 +119,31 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted(
         var ukjentBosted: Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted? = null
         var vegadresse: Folkeregisterettilgjengeliggjoeringhendelsev1Vegadresse? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "adressegradering" -> parsedValues.adressegradering = Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted.Adressegradering.valueOf(p.text)
-                    "startdatoForKontrakt" -> parsedValues.startdatoForKontrakt = LocalDate.parse(p.text)
+                    "startdatoForKontrakt" -> parsedValues.startdatoForKontrakt = java.time.LocalDate.parse(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
                     "adresseIdentifikatorFraMatrikkelen" -> parsedValues.adresseIdentifikatorFraMatrikkelen = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
                     "matrikkeladresse" -> parsedValues.matrikkeladresse = Folkeregisterettilgjengeliggjoeringhendelsev1Matrikkeladresse.deserializer.deserialize(p, ctx)
                     "naerAdresseIdentifikatorFraMatrikkelen" -> parsedValues.naerAdresseIdentifikatorFraMatrikkelen = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
-                    "sluttdatoForKontrakt" -> parsedValues.sluttdatoForKontrakt = LocalDate.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "sluttdatoForKontrakt" -> parsedValues.sluttdatoForKontrakt = java.time.LocalDate.parse(p.text)
                     "ukjentBosted" -> parsedValues.ukjentBosted = Folkeregisterettilgjengeliggjoeringhendelsev1UkjentBosted.deserializer.deserialize(p, ctx)
                     "vegadresse" -> parsedValues.vegadresse = Folkeregisterettilgjengeliggjoeringhendelsev1Vegadresse.deserializer.deserialize(p, ctx)
 
@@ -140,7 +151,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted(
                 adressegradering = parsedValues.adressegradering!!,
                 startdatoForKontrakt = parsedValues.startdatoForKontrakt!!,
@@ -157,8 +167,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1DeltBosted(
                 vegadresse = parsedValues.vegadresse,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

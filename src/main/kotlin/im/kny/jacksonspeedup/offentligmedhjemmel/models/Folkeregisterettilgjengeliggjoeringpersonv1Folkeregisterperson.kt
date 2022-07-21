@@ -52,17 +52,17 @@ import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjenge
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1UtflyttingFraNorge
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1VergemaalRepresentasjonEllerFremtidsfullmakt
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adressebeskyttelse 
  * @param bibehold 
  * @param bostedsadresse 
@@ -96,73 +96,107 @@ import java.time.format.*
  * @param utlendingsmyndighetenesIdentifikasjonsnummer 
  * @param vergemaalEllerFremtidsfullmakt 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson (
+
     @field:JsonProperty("adressebeskyttelse")
     val adressebeskyttelse: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse>? = null,
+
     @field:JsonProperty("bibehold")
     val bibehold: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1BibeholdAvNorskStatsborgerskap>? = null,
+
     @field:JsonProperty("bostedsadresse")
     val bostedsadresse: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Bostedsadresse>? = null,
+
     @field:JsonProperty("brukAvSamiskSpraak")
     val brukAvSamiskSpraak: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1SamiskSpraak>? = null,
+
     @field:JsonProperty("deltBosted")
     val deltBosted: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1DeltBosted>? = null,
+
     @field:JsonProperty("doedsfall")
     val doedsfall: Folkeregisterettilgjengeliggjoeringpersonv1Doedsfall? = null,
+
     @field:JsonProperty("falskIdentitet")
     val falskIdentitet: Folkeregisterettilgjengeliggjoeringpersonv1FalskIdentitet? = null,
+
     @field:JsonProperty("familierelasjon")
     val familierelasjon: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Familierelasjon>? = null,
+
     @field:JsonProperty("foedsel")
     val foedsel: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Foedsel>? = null,
+
     @field:JsonProperty("foedselINorge")
     val foedselINorge: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1FoedselINorge>? = null,
+
     @field:JsonProperty("foreldreansvar")
     val foreldreansvar: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Foreldreansvar>? = null,
+
     @field:JsonProperty("forholdTilSametingetsValgmanntall")
     val forholdTilSametingetsValgmanntall: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1SametingetsValgmanntall>? = null,
+
     @field:JsonProperty("identifikasjonsnummer")
     val identifikasjonsnummer: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisteridentifikator>? = null,
+
     @field:JsonProperty("identitetsgrunnlag")
     val identitetsgrunnlag: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Identitetsgrunnlag>? = null,
+
     @field:JsonProperty("innflytting")
     val innflytting: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1InnflyttingTilNorge>? = null,
+
     @field:JsonProperty("kjoenn")
     val kjoenn: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Personkjoenn>? = null,
+
     @field:JsonProperty("kontaktinformasjonForDoedsbo")
     val kontaktinformasjonForDoedsbo: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1KontaktinformasjonForDoedsbo>? = null,
+
     @field:JsonProperty("legitimasjonsdokument")
     val legitimasjonsdokument: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Identifikasjonsdokument>? = null,
+
     @field:JsonProperty("navn")
     val navn: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn>? = null,
+
     @field:JsonProperty("opphold")
     val opphold: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Opphold>? = null,
+
     @field:JsonProperty("oppholdPaaSvalbard")
     val oppholdPaaSvalbard: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1OppholdPaaSvalbard>? = null,
+
     @field:JsonProperty("oppholdsadresse")
     val oppholdsadresse: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Oppholdsadresse>? = null,
+
     @field:JsonProperty("postadresse")
     val postadresse: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Kontaktadresse>? = null,
+
     @field:JsonProperty("postadresseIUtlandet")
     val postadresseIUtlandet: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1KontaktadresseIUtlandet>? = null,
+
     @field:JsonProperty("preferertKontaktadresse")
     val preferertKontaktadresse: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1PreferertKontaktadresse>? = null,
+
     @field:JsonProperty("sivilstand")
     val sivilstand: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Sivilstand>? = null,
+
     @field:JsonProperty("statsborgerskap")
     val statsborgerskap: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap>? = null,
+
     @field:JsonProperty("status")
     val status: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonstatus>? = null,
+
     @field:JsonProperty("utenlandskPersonidentifikasjon")
     val utenlandskPersonidentifikasjon: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Personidentifikasjon>? = null,
+
     @field:JsonProperty("utflytting")
     val utflytting: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1UtflyttingFraNorge>? = null,
+
     @field:JsonProperty("utlendingsmyndighetenesIdentifikasjonsnummer")
     val utlendingsmyndighetenesIdentifikasjonsnummer: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1Personidentifikasjon>? = null,
+
     @field:JsonProperty("vergemaalEllerFremtidsfullmakt")
     val vergemaalEllerFremtidsfullmakt: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringpersonv1VergemaalRepresentasjonEllerFremtidsfullmakt>? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var adressebeskyttelse: List<Folkeregisterettilgjengeliggjoeringpersonv1GraderingAvAdresse>? = null
         var bibehold: List<Folkeregisterettilgjengeliggjoeringpersonv1BibeholdAvNorskStatsborgerskap>? = null
@@ -197,19 +231,15 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson(
         var utlendingsmyndighetenesIdentifikasjonsnummer: List<Folkeregisterettilgjengeliggjoeringpersonv1Personidentifikasjon>? = null
         var vergemaalEllerFremtidsfullmakt: List<Folkeregisterettilgjengeliggjoeringpersonv1VergemaalRepresentasjonEllerFremtidsfullmakt>? = null
     }
-
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
                 curr = p.nextToken()
@@ -432,7 +462,6 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson(
                 adressebeskyttelse = parsedValues.adressebeskyttelse,
                 bibehold = parsedValues.bibehold,
@@ -468,8 +497,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson(
                 vergemaalEllerFremtidsfullmakt = parsedValues.vergemaalEllerFremtidsfullmakt,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

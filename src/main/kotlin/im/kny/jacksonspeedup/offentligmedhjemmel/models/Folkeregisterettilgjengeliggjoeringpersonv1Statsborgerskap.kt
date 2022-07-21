@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param statsborgerskap 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -41,25 +41,35 @@ import java.time.format.*
  * @param kilde 
  * @param opphoerstidspunkt 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap (
+
     @field:JsonProperty("statsborgerskap")
     val statsborgerskap: kotlin.String,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("erGjeldende")
     val erGjeldende: kotlin.Boolean? = null,
+
     @field:JsonProperty("ervervsdato")
     val ervervsdato: java.time.LocalDate? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var statsborgerskap: kotlin.String? = null
         var aarsak: kotlin.String? = null
@@ -70,38 +80,32 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap(
         var kilde: kotlin.String? = null
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "statsborgerskap" -> parsedValues.statsborgerskap = p.text
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "erGjeldende" -> parsedValues.erGjeldende = p.text.toBoolean()
-                    "ervervsdato" -> parsedValues.ervervsdato = LocalDate.parse(p.text)
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "ervervsdato" -> parsedValues.ervervsdato = java.time.LocalDate.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap(
                 statsborgerskap = parsedValues.statsborgerskap!!,
                 aarsak = parsedValues.aarsak,
@@ -113,8 +117,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Statsborgerskap(
                 opphoerstidspunkt = parsedValues.opphoerstidspunkt,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

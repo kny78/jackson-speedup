@@ -21,64 +21,63 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param dokumentkontrollstatus 
  * @param dokumentkontrolltidspunkt 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1TekniskDokumentkontroll(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1TekniskDokumentkontroll (
+
     @field:JsonProperty("dokumentkontrollstatus")
     val dokumentkontrollstatus: kotlin.String,
+
     @field:JsonProperty("dokumentkontrolltidspunkt")
     val dokumentkontrolltidspunkt: java.time.OffsetDateTime? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var dokumentkontrollstatus: kotlin.String? = null
         var dokumentkontrolltidspunkt: java.time.OffsetDateTime? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1TekniskDokumentkontroll>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1TekniskDokumentkontroll {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "dokumentkontrollstatus" -> parsedValues.dokumentkontrollstatus = p.text
 
-                    "dokumentkontrolltidspunkt" -> parsedValues.dokumentkontrolltidspunkt = OffsetDateTime.parse(p.text)
+                    "dokumentkontrolltidspunkt" -> parsedValues.dokumentkontrolltidspunkt = java.time.OffsetDateTime.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1TekniskDokumentkontroll(
                 dokumentkontrollstatus = parsedValues.dokumentkontrollstatus!!,
                 dokumentkontrolltidspunkt = parsedValues.dokumentkontrolltidspunkt,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

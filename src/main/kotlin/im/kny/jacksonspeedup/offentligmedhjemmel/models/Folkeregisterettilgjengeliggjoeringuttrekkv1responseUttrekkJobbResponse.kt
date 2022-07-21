@@ -21,47 +21,46 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param feilmelding 
  * @param jobbId 
  */
-data class Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkJobbResponse(
+
+data class Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkJobbResponse (
+
     @field:JsonProperty("feilmelding")
     val feilmelding: kotlin.String? = null,
+
     @field:JsonProperty("jobbId")
     val jobbId: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var feilmelding: kotlin.String? = null
         var jobbId: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkJobbResponse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkJobbResponse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "feilmelding" -> parsedValues.feilmelding = p.text
@@ -71,14 +70,14 @@ data class Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkJobbRespon
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringuttrekkv1responseUttrekkJobbResponse(
                 feilmelding = parsedValues.feilmelding,
                 jobbId = parsedValues.jobbId,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

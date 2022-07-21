@@ -22,17 +22,17 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Personnavn
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param etternavn 
  * @param fornavn 
  * @param aarsak 
@@ -45,31 +45,44 @@ import java.time.format.*
  * @param opphoerstidspunkt 
  * @param originaltNavn 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn (
+
     @field:JsonProperty("etternavn")
     val etternavn: kotlin.String,
+
     @field:JsonProperty("fornavn")
     val fornavn: kotlin.String,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("erGjeldende")
     val erGjeldende: kotlin.Boolean? = null,
+
     @field:JsonProperty("forkortetNavn")
     val forkortetNavn: kotlin.String? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("mellomnavn")
     val mellomnavn: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("originaltNavn")
     val originaltNavn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var etternavn: kotlin.String? = null
         var fornavn: kotlin.String? = null
@@ -83,41 +96,35 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn(
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
         var originaltNavn: Folkeregisterettilgjengeliggjoeringpersonv1Personnavn? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "etternavn" -> parsedValues.etternavn = p.text
                     "fornavn" -> parsedValues.fornavn = p.text
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "erGjeldende" -> parsedValues.erGjeldende = p.text.toBoolean()
                     "forkortetNavn" -> parsedValues.forkortetNavn = p.text
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
                     "mellomnavn" -> parsedValues.mellomnavn = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "originaltNavn" -> parsedValues.originaltNavn = Folkeregisterettilgjengeliggjoeringpersonv1Personnavn.deserializer.deserialize(p, ctx)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn(
                 etternavn = parsedValues.etternavn!!,
                 fornavn = parsedValues.fornavn!!,
@@ -132,8 +139,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterpersonnavn(
                 originaltNavn = parsedValues.originaltNavn,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

@@ -21,47 +21,46 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adresselinje 
  * @param landkode 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1AdresseIFrittFormat(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1AdresseIFrittFormat (
+
     @field:JsonProperty("adresselinje")
     val adresselinje: kotlin.collections.List<kotlin.String>? = null,
+
     @field:JsonProperty("landkode")
     val landkode: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var adresselinje: List<kotlin.String>? = null
         var landkode: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1AdresseIFrittFormat>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1AdresseIFrittFormat {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "adresselinje" -> {
@@ -77,14 +76,14 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1AdresseIFrittFormat(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1AdresseIFrittFormat(
                 adresselinje = parsedValues.adresselinje,
                 landkode = parsedValues.landkode,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

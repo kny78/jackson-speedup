@@ -22,83 +22,91 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param ajourholdstidspunkt 
  * @param folkeregisteridentifikator 
  * @param hendelsestype 
  * @param egenskapshendelse 
  * @param hendelsesaarsakIDsf 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse (
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime,
+
     @field:JsonProperty("folkeregisteridentifikator")
     val folkeregisteridentifikator: kotlin.String,
+
     @field:JsonProperty("hendelsestype")
     val hendelsestype: Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse.Hendelsestype,
+
     @field:JsonProperty("egenskapshendelse")
     val egenskapshendelse: kotlin.collections.List<Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata>? = null,
+
     @field:JsonProperty("hendelsesaarsakIDsf")
     val hendelsesaarsakIDsf: kotlin.String? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: personErOpprettet,personErReaktivert,personErOppdatert,personErOpphoert,personErViderefoertSomGjeldendeVedSammenslaaing,personErOpphoertSomDublett,personErEndretVedSplitting,personErGjenopprettetVedSplitting,personErDoed,personErBosatt,personErUtflyttet,endringIStatus,endringIIdentitetsgrunnlag,endringIUtenlandskPersonidentifikasjon,endringIUtlendingsmyndighetenesIdentifikasjonsnummer,endringILegitimasjonsdokument,endringIIdentifikasjonsnummer,endringIFalskIdentitet,endringIKontaktopplysningerForDoedsbo,endringIDeltBosted,endringIFoedsel,endringIFoedselINorge,endringIKjoenn,endringIFamilierelasjon,endringISivilstand,endringIDoedsfall,endringINavn,endringIAdressebeskyttelse,endringIBostedsadresse,endringIBostedsadresseUtenFlytting,endringIOppholdsadresse,endringIInnflytting,endringIUtflytting,endringIBrukAvSamiskSpraak,endringISametingetsValgmanntall,endringIKontaktinformasjon,endringIForeldreansvar,endringIStatsborgerskap,endringIOpphold,endringIOppholdPaaSvalbard,endringIVergemaal,endringIPerson
-    */
-    enum class Hendelsestype(val value: kotlin.String){
-        personErOpprettet("personErOpprettet"),
-        personErReaktivert("personErReaktivert"),
-        personErOppdatert("personErOppdatert"),
-        personErOpphoert("personErOpphoert"),
-        personErViderefoertSomGjeldendeVedSammenslaaing("personErViderefoertSomGjeldendeVedSammenslaaing"),
-        personErOpphoertSomDublett("personErOpphoertSomDublett"),
-        personErEndretVedSplitting("personErEndretVedSplitting"),
-        personErGjenopprettetVedSplitting("personErGjenopprettetVedSplitting"),
-        personErDoed("personErDoed"),
-        personErBosatt("personErBosatt"),
-        personErUtflyttet("personErUtflyttet"),
-        endringIStatus("endringIStatus"),
-        endringIIdentitetsgrunnlag("endringIIdentitetsgrunnlag"),
-        endringIUtenlandskPersonidentifikasjon("endringIUtenlandskPersonidentifikasjon"),
-        endringIUtlendingsmyndighetenesIdentifikasjonsnummer("endringIUtlendingsmyndighetenesIdentifikasjonsnummer"),
-        endringILegitimasjonsdokument("endringILegitimasjonsdokument"),
-        endringIIdentifikasjonsnummer("endringIIdentifikasjonsnummer"),
-        endringIFalskIdentitet("endringIFalskIdentitet"),
-        endringIKontaktopplysningerForDoedsbo("endringIKontaktopplysningerForDoedsbo"),
-        endringIDeltBosted("endringIDeltBosted"),
-        endringIFoedsel("endringIFoedsel"),
-        endringIFoedselINorge("endringIFoedselINorge"),
-        endringIKjoenn("endringIKjoenn"),
-        endringIFamilierelasjon("endringIFamilierelasjon"),
-        endringISivilstand("endringISivilstand"),
-        endringIDoedsfall("endringIDoedsfall"),
-        endringINavn("endringINavn"),
-        endringIAdressebeskyttelse("endringIAdressebeskyttelse"),
-        endringIBostedsadresse("endringIBostedsadresse"),
-        endringIBostedsadresseUtenFlytting("endringIBostedsadresseUtenFlytting"),
-        endringIOppholdsadresse("endringIOppholdsadresse"),
-        endringIInnflytting("endringIInnflytting"),
-        endringIUtflytting("endringIUtflytting"),
-        endringIBrukAvSamiskSpraak("endringIBrukAvSamiskSpraak"),
-        endringISametingetsValgmanntall("endringISametingetsValgmanntall"),
-        endringIKontaktinformasjon("endringIKontaktinformasjon"),
-        endringIForeldreansvar("endringIForeldreansvar"),
-        endringIStatsborgerskap("endringIStatsborgerskap"),
-        endringIOpphold("endringIOpphold"),
-        endringIOppholdPaaSvalbard("endringIOppholdPaaSvalbard"),
-        endringIVergemaal("endringIVergemaal"),
-        endringIPerson("endringIPerson");
+     * 
+     *
+     * Values: personErOpprettet,personErReaktivert,personErOppdatert,personErOpphoert,personErViderefoertSomGjeldendeVedSammenslaaing,personErOpphoertSomDublett,personErEndretVedSplitting,personErGjenopprettetVedSplitting,personErDoed,personErBosatt,personErUtflyttet,endringIStatus,endringIIdentitetsgrunnlag,endringIUtenlandskPersonidentifikasjon,endringIUtlendingsmyndighetenesIdentifikasjonsnummer,endringILegitimasjonsdokument,endringIIdentifikasjonsnummer,endringIFalskIdentitet,endringIKontaktopplysningerForDoedsbo,endringIDeltBosted,endringIFoedsel,endringIFoedselINorge,endringIKjoenn,endringIFamilierelasjon,endringISivilstand,endringIDoedsfall,endringINavn,endringIAdressebeskyttelse,endringIBostedsadresse,endringIBostedsadresseUtenFlytting,endringIOppholdsadresse,endringIInnflytting,endringIUtflytting,endringIBrukAvSamiskSpraak,endringISametingetsValgmanntall,endringIKontaktinformasjon,endringIForeldreansvar,endringIStatsborgerskap,endringIOpphold,endringIOppholdPaaSvalbard,endringIVergemaal,endringIPerson
+     */
+    enum class Hendelsestype(val value: kotlin.String) {
+        @JsonProperty(value = "personErOpprettet") personErOpprettet("personErOpprettet"),
+        @JsonProperty(value = "personErReaktivert") personErReaktivert("personErReaktivert"),
+        @JsonProperty(value = "personErOppdatert") personErOppdatert("personErOppdatert"),
+        @JsonProperty(value = "personErOpphoert") personErOpphoert("personErOpphoert"),
+        @JsonProperty(value = "personErViderefoertSomGjeldendeVedSammenslaaing") personErViderefoertSomGjeldendeVedSammenslaaing("personErViderefoertSomGjeldendeVedSammenslaaing"),
+        @JsonProperty(value = "personErOpphoertSomDublett") personErOpphoertSomDublett("personErOpphoertSomDublett"),
+        @JsonProperty(value = "personErEndretVedSplitting") personErEndretVedSplitting("personErEndretVedSplitting"),
+        @JsonProperty(value = "personErGjenopprettetVedSplitting") personErGjenopprettetVedSplitting("personErGjenopprettetVedSplitting"),
+        @JsonProperty(value = "personErDoed") personErDoed("personErDoed"),
+        @JsonProperty(value = "personErBosatt") personErBosatt("personErBosatt"),
+        @JsonProperty(value = "personErUtflyttet") personErUtflyttet("personErUtflyttet"),
+        @JsonProperty(value = "endringIStatus") endringIStatus("endringIStatus"),
+        @JsonProperty(value = "endringIIdentitetsgrunnlag") endringIIdentitetsgrunnlag("endringIIdentitetsgrunnlag"),
+        @JsonProperty(value = "endringIUtenlandskPersonidentifikasjon") endringIUtenlandskPersonidentifikasjon("endringIUtenlandskPersonidentifikasjon"),
+        @JsonProperty(value = "endringIUtlendingsmyndighetenesIdentifikasjonsnummer") endringIUtlendingsmyndighetenesIdentifikasjonsnummer("endringIUtlendingsmyndighetenesIdentifikasjonsnummer"),
+        @JsonProperty(value = "endringILegitimasjonsdokument") endringILegitimasjonsdokument("endringILegitimasjonsdokument"),
+        @JsonProperty(value = "endringIIdentifikasjonsnummer") endringIIdentifikasjonsnummer("endringIIdentifikasjonsnummer"),
+        @JsonProperty(value = "endringIFalskIdentitet") endringIFalskIdentitet("endringIFalskIdentitet"),
+        @JsonProperty(value = "endringIKontaktopplysningerForDoedsbo") endringIKontaktopplysningerForDoedsbo("endringIKontaktopplysningerForDoedsbo"),
+        @JsonProperty(value = "endringIDeltBosted") endringIDeltBosted("endringIDeltBosted"),
+        @JsonProperty(value = "endringIFoedsel") endringIFoedsel("endringIFoedsel"),
+        @JsonProperty(value = "endringIFoedselINorge") endringIFoedselINorge("endringIFoedselINorge"),
+        @JsonProperty(value = "endringIKjoenn") endringIKjoenn("endringIKjoenn"),
+        @JsonProperty(value = "endringIFamilierelasjon") endringIFamilierelasjon("endringIFamilierelasjon"),
+        @JsonProperty(value = "endringISivilstand") endringISivilstand("endringISivilstand"),
+        @JsonProperty(value = "endringIDoedsfall") endringIDoedsfall("endringIDoedsfall"),
+        @JsonProperty(value = "endringINavn") endringINavn("endringINavn"),
+        @JsonProperty(value = "endringIAdressebeskyttelse") endringIAdressebeskyttelse("endringIAdressebeskyttelse"),
+        @JsonProperty(value = "endringIBostedsadresse") endringIBostedsadresse("endringIBostedsadresse"),
+        @JsonProperty(value = "endringIBostedsadresseUtenFlytting") endringIBostedsadresseUtenFlytting("endringIBostedsadresseUtenFlytting"),
+        @JsonProperty(value = "endringIOppholdsadresse") endringIOppholdsadresse("endringIOppholdsadresse"),
+        @JsonProperty(value = "endringIInnflytting") endringIInnflytting("endringIInnflytting"),
+        @JsonProperty(value = "endringIUtflytting") endringIUtflytting("endringIUtflytting"),
+        @JsonProperty(value = "endringIBrukAvSamiskSpraak") endringIBrukAvSamiskSpraak("endringIBrukAvSamiskSpraak"),
+        @JsonProperty(value = "endringISametingetsValgmanntall") endringISametingetsValgmanntall("endringISametingetsValgmanntall"),
+        @JsonProperty(value = "endringIKontaktinformasjon") endringIKontaktinformasjon("endringIKontaktinformasjon"),
+        @JsonProperty(value = "endringIForeldreansvar") endringIForeldreansvar("endringIForeldreansvar"),
+        @JsonProperty(value = "endringIStatsborgerskap") endringIStatsborgerskap("endringIStatsborgerskap"),
+        @JsonProperty(value = "endringIOpphold") endringIOpphold("endringIOpphold"),
+        @JsonProperty(value = "endringIOppholdPaaSvalbard") endringIOppholdPaaSvalbard("endringIOppholdPaaSvalbard"),
+        @JsonProperty(value = "endringIVergemaal") endringIVergemaal("endringIVergemaal"),
+        @JsonProperty(value = "endringIPerson") endringIPerson("endringIPerson");
     }
     class ParsedValues{
         var ajourholdstidspunkt: java.time.OffsetDateTime? = null
@@ -107,24 +115,19 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse(
         var egenskapshendelse: List<Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata>? = null
         var hendelsesaarsakIDsf: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "folkeregisteridentifikator" -> parsedValues.folkeregisteridentifikator = p.text
 
                     "hendelsestype" -> parsedValues.hendelsestype = Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse.Hendelsestype.valueOf(p.text)
@@ -142,7 +145,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse(
                 ajourholdstidspunkt = parsedValues.ajourholdstidspunkt!!,
                 folkeregisteridentifikator = parsedValues.folkeregisteridentifikator!!,
@@ -151,8 +153,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse(
                 hendelsesaarsakIDsf = parsedValues.hendelsesaarsakIDsf,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

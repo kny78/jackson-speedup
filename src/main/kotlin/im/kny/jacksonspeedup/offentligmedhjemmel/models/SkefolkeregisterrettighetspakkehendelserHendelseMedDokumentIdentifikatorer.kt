@@ -21,36 +21,43 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param ajourholdstidspunkt 
  * @param folkeregisteridentifikator 
  * @param hendelsesdokument 
  * @param hendelsetype 
  * @param persondokument 
  */
-data class SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer(
+
+data class SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer (
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("folkeregisteridentifikator")
     val folkeregisteridentifikator: kotlin.String? = null,
+
     @field:JsonProperty("hendelsesdokument")
     val hendelsesdokument: kotlin.String? = null,
+
     @field:JsonProperty("hendelsetype")
     val hendelsetype: kotlin.String? = null,
+
     @field:JsonProperty("persondokument")
     val persondokument: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var ajourholdstidspunkt: java.time.OffsetDateTime? = null
         var folkeregisteridentifikator: kotlin.String? = null
@@ -58,25 +65,20 @@ data class SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifika
         var hendelsetype: kotlin.String? = null
         var persondokument: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "folkeregisteridentifikator" -> parsedValues.folkeregisteridentifikator = p.text
                     "hendelsesdokument" -> parsedValues.hendelsesdokument = p.text
                     "hendelsetype" -> parsedValues.hendelsetype = p.text
@@ -86,7 +88,6 @@ data class SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifika
                 }
                 curr = p.nextToken()
             }
-
             return SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer(
                 ajourholdstidspunkt = parsedValues.ajourholdstidspunkt,
                 folkeregisteridentifikator = parsedValues.folkeregisteridentifikator,
@@ -95,8 +96,9 @@ data class SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifika
                 persondokument = parsedValues.persondokument,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param oppholdstillatelse 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -42,35 +42,47 @@ import java.time.format.*
  * @param oppholdFra 
  * @param oppholdTil 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Opphold(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Opphold (
+
     @field:JsonProperty("oppholdstillatelse")
     val oppholdstillatelse: Folkeregisterettilgjengeliggjoeringpersonv1Opphold.Oppholdstillatelse,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("erGjeldende")
     val erGjeldende: kotlin.Boolean? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("oppholdFra")
     val oppholdFra: java.time.LocalDate? = null,
+
     @field:JsonProperty("oppholdTil")
     val oppholdTil: java.time.LocalDate? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: midlertidig,permanent,opplysningMangler
-    */
-    enum class Oppholdstillatelse(val value: kotlin.String){
-        midlertidig("midlertidig"),
-        permanent("permanent"),
-        opplysningMangler("opplysningMangler");
+     * 
+     *
+     * Values: midlertidig,permanent,opplysningMangler
+     */
+    enum class Oppholdstillatelse(val value: kotlin.String) {
+        @JsonProperty(value = "midlertidig") midlertidig("midlertidig"),
+        @JsonProperty(value = "permanent") permanent("permanent"),
+        @JsonProperty(value = "opplysningMangler") opplysningMangler("opplysningMangler");
     }
     class ParsedValues{
         var oppholdstillatelse: Folkeregisterettilgjengeliggjoeringpersonv1Opphold.Oppholdstillatelse? = null
@@ -83,40 +95,34 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Opphold(
         var oppholdFra: java.time.LocalDate? = null
         var oppholdTil: java.time.LocalDate? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Opphold>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Opphold {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "oppholdstillatelse" -> parsedValues.oppholdstillatelse = Folkeregisterettilgjengeliggjoeringpersonv1Opphold.Oppholdstillatelse.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "erGjeldende" -> parsedValues.erGjeldende = p.text.toBoolean()
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
-                    "oppholdFra" -> parsedValues.oppholdFra = LocalDate.parse(p.text)
-                    "oppholdTil" -> parsedValues.oppholdTil = LocalDate.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "oppholdFra" -> parsedValues.oppholdFra = java.time.LocalDate.parse(p.text)
+                    "oppholdTil" -> parsedValues.oppholdTil = java.time.LocalDate.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Opphold(
                 oppholdstillatelse = parsedValues.oppholdstillatelse!!,
                 aarsak = parsedValues.aarsak,
@@ -129,8 +135,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Opphold(
                 oppholdTil = parsedValues.oppholdTil,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

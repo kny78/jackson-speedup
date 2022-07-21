@@ -23,51 +23,51 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param foedselsEllerDNummer 
  * @param feilmelding 
  * @param folkeregisterperson 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag (
+
     @field:JsonProperty("foedselsEllerDNummer")
     val foedselsEllerDNummer: kotlin.String,
+
     @field:JsonProperty("feilmelding")
     val feilmelding: Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding? = null,
+
     @field:JsonProperty("folkeregisterperson")
     val folkeregisterperson: Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var foedselsEllerDNummer: kotlin.String? = null
         var feilmelding: Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding? = null
         var folkeregisterperson: Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "foedselsEllerDNummer" -> parsedValues.foedselsEllerDNummer = p.text
 
@@ -78,15 +78,15 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseOppslag(
                 foedselsEllerDNummer = parsedValues.foedselsEllerDNummer!!,
                 feilmelding = parsedValues.feilmelding,
                 folkeregisterperson = parsedValues.folkeregisterperson,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

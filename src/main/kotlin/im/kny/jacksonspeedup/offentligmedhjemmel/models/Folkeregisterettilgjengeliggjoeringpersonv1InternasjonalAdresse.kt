@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param landkode 
  * @param adressenavn 
  * @param boenhet 
@@ -44,31 +44,44 @@ import java.time.format.*
  * @param postkode 
  * @param region 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse (
+
     @field:JsonProperty("landkode")
     val landkode: kotlin.String,
+
     @field:JsonProperty("adressenavn")
     val adressenavn: kotlin.String? = null,
+
     @field:JsonProperty("boenhet")
     val boenhet: kotlin.String? = null,
+
     @field:JsonProperty("byEllerStedsnavn")
     val byEllerStedsnavn: kotlin.String? = null,
+
     @field:JsonProperty("bygning")
     val bygning: kotlin.String? = null,
+
     @field:JsonProperty("coAdressenavn")
     val coAdressenavn: kotlin.String? = null,
+
     @field:JsonProperty("distriktsnavn")
     val distriktsnavn: kotlin.String? = null,
+
     @field:JsonProperty("etasjenummer")
     val etasjenummer: kotlin.String? = null,
+
     @field:JsonProperty("postboks")
     val postboks: kotlin.String? = null,
+
     @field:JsonProperty("postkode")
     val postkode: kotlin.String? = null,
+
     @field:JsonProperty("region")
     val region: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var landkode: kotlin.String? = null
         var adressenavn: kotlin.String? = null
@@ -82,22 +95,17 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse(
         var postkode: kotlin.String? = null
         var region: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "landkode" -> parsedValues.landkode = p.text
 
@@ -116,7 +124,6 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse(
                 landkode = parsedValues.landkode!!,
                 adressenavn = parsedValues.adressenavn,
@@ -131,8 +138,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1InternasjonalAdresse(
                 region = parsedValues.region,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

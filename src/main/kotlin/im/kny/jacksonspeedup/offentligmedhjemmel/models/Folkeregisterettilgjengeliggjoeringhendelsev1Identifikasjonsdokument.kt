@@ -22,17 +22,17 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1TekniskDokumentkontroll
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param identifikasjonsdokumenttype 
  * @param utstederland 
  * @param aarsak 
@@ -46,33 +46,47 @@ import java.time.format.*
  * @param opphoerstidspunkt 
  * @param utstedernavn 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument (
+
     @field:JsonProperty("identifikasjonsdokumenttype")
     val identifikasjonsdokumenttype: kotlin.String,
+
     @field:JsonProperty("utstederland")
     val utstederland: kotlin.String,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("dokumentkontroll")
     val dokumentkontroll: Folkeregisterettilgjengeliggjoeringhendelsev1TekniskDokumentkontroll? = null,
+
     @field:JsonProperty("gyldigFra")
     val gyldigFra: java.time.LocalDate? = null,
+
     @field:JsonProperty("gyldigTil")
     val gyldigTil: java.time.LocalDate? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("identifikasjonsdokumentnummer")
     val identifikasjonsdokumentnummer: kotlin.String? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("utstedernavn")
     val utstedernavn: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var identifikasjonsdokumenttype: kotlin.String? = null
         var utstederland: kotlin.String? = null
@@ -87,42 +101,36 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument(
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
         var utstedernavn: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "identifikasjonsdokumenttype" -> parsedValues.identifikasjonsdokumenttype = p.text
                     "utstederland" -> parsedValues.utstederland = p.text
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "dokumentkontroll" -> parsedValues.dokumentkontroll = Folkeregisterettilgjengeliggjoeringhendelsev1TekniskDokumentkontroll.deserializer.deserialize(p, ctx)
-                    "gyldigFra" -> parsedValues.gyldigFra = LocalDate.parse(p.text)
-                    "gyldigTil" -> parsedValues.gyldigTil = LocalDate.parse(p.text)
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldigFra" -> parsedValues.gyldigFra = java.time.LocalDate.parse(p.text)
+                    "gyldigTil" -> parsedValues.gyldigTil = java.time.LocalDate.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "identifikasjonsdokumentnummer" -> parsedValues.identifikasjonsdokumentnummer = p.text
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "utstedernavn" -> parsedValues.utstedernavn = p.text
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument(
                 identifikasjonsdokumenttype = parsedValues.identifikasjonsdokumenttype!!,
                 utstederland = parsedValues.utstederland!!,
@@ -138,8 +146,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Identifikasjonsdokument(
                 utstedernavn = parsedValues.utstedernavn,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

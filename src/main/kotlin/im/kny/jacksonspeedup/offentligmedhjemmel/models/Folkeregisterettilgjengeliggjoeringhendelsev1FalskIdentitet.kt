@@ -22,17 +22,17 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1IdentifiserendeInformasjon
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param aarsak 
  * @param ajourholdstidspunkt 
  * @param erFalsk 
@@ -43,27 +43,38 @@ import java.time.format.*
  * @param rettIdentitetVedIdentifikasjonsnummer 
  * @param rettIdentitetVedOpplysninger 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet (
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("erFalsk")
     val erFalsk: kotlin.Boolean? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("rettIdentitetErUkjent")
     val rettIdentitetErUkjent: kotlin.Boolean? = null,
+
     @field:JsonProperty("rettIdentitetVedIdentifikasjonsnummer")
     val rettIdentitetVedIdentifikasjonsnummer: kotlin.String? = null,
+
     @field:JsonProperty("rettIdentitetVedOpplysninger")
     val rettIdentitetVedOpplysninger: Folkeregisterettilgjengeliggjoeringhendelsev1IdentifiserendeInformasjon? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var aarsak: kotlin.String? = null
         var ajourholdstidspunkt: java.time.OffsetDateTime? = null
@@ -75,30 +86,25 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet(
         var rettIdentitetVedIdentifikasjonsnummer: kotlin.String? = null
         var rettIdentitetVedOpplysninger: Folkeregisterettilgjengeliggjoeringhendelsev1IdentifiserendeInformasjon? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "erFalsk" -> parsedValues.erFalsk = p.text.toBoolean()
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "rettIdentitetErUkjent" -> parsedValues.rettIdentitetErUkjent = p.text.toBoolean()
                     "rettIdentitetVedIdentifikasjonsnummer" -> parsedValues.rettIdentitetVedIdentifikasjonsnummer = p.text
                     "rettIdentitetVedOpplysninger" -> parsedValues.rettIdentitetVedOpplysninger = Folkeregisterettilgjengeliggjoeringhendelsev1IdentifiserendeInformasjon.deserializer.deserialize(p, ctx)
@@ -107,7 +113,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet(
                 aarsak = parsedValues.aarsak,
                 ajourholdstidspunkt = parsedValues.ajourholdstidspunkt,
@@ -120,8 +125,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1FalskIdentitet(
                 rettIdentitetVedOpplysninger = parsedValues.rettIdentitetVedOpplysninger,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

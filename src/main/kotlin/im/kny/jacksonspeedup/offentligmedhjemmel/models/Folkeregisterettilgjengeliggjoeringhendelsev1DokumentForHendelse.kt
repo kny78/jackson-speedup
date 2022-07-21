@@ -22,51 +22,51 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param dokumentidentifikator 
  * @param hendelse 
  * @param skjemaversjon 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse (
+
     @field:JsonProperty("dokumentidentifikator")
     val dokumentidentifikator: kotlin.String,
+
     @field:JsonProperty("hendelse")
     val hendelse: Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse,
+
     @field:JsonProperty("skjemaversjon")
     val skjemaversjon: kotlin.String
-) 
-{
+
+) {
+
     class ParsedValues{
         var dokumentidentifikator: kotlin.String? = null
         var hendelse: Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse? = null
         var skjemaversjon: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "dokumentidentifikator" -> parsedValues.dokumentidentifikator = p.text
                     "hendelse" -> parsedValues.hendelse = Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse.deserializer.deserialize(p, ctx)
@@ -77,15 +77,15 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse(
                 dokumentidentifikator = parsedValues.dokumentidentifikator!!,
                 hendelse = parsedValues.hendelse!!,
                 skjemaversjon = parsedValues.skjemaversjon!!,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

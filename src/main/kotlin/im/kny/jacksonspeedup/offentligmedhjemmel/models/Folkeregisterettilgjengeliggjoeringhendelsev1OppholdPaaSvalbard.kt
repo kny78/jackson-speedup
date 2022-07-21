@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param antattOppholdsvarighet 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -44,40 +44,54 @@ import java.time.format.*
  * @param sluttdato 
  * @param startdato 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard (
+
     @field:JsonProperty("antattOppholdsvarighet")
     val antattOppholdsvarighet: Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard.AntattOppholdsvarighet,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("antallTidligereOpphold")
     val antallTidligereOpphold: kotlin.Long? = null,
+
     @field:JsonProperty("fraflyttingskommunenummer")
     val fraflyttingskommunenummer: kotlin.String? = null,
+
     @field:JsonProperty("fraflyttingsland")
     val fraflyttingsland: kotlin.String? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("sluttdato")
     val sluttdato: java.time.LocalDate? = null,
+
     @field:JsonProperty("startdato")
     val startdato: java.time.LocalDate? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: underSeksMaaneder,overSeksMaaneder,overTolvMaaneder,ukjent
-    */
-    enum class AntattOppholdsvarighet(val value: kotlin.String){
-        underSeksMaaneder("underSeksMaaneder"),
-        overSeksMaaneder("overSeksMaaneder"),
-        overTolvMaaneder("overTolvMaaneder"),
-        ukjent("ukjent");
+     * 
+     *
+     * Values: underSeksMaaneder,overSeksMaaneder,overTolvMaaneder,ukjent
+     */
+    enum class AntattOppholdsvarighet(val value: kotlin.String) {
+        @JsonProperty(value = "underSeksMaaneder") underSeksMaaneder("underSeksMaaneder"),
+        @JsonProperty(value = "overSeksMaaneder") overSeksMaaneder("overSeksMaaneder"),
+        @JsonProperty(value = "overTolvMaaneder") overTolvMaaneder("overTolvMaaneder"),
+        @JsonProperty(value = "ukjent") ukjent("ukjent");
     }
     class ParsedValues{
         var antattOppholdsvarighet: Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard.AntattOppholdsvarighet? = null
@@ -92,42 +106,36 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard(
         var sluttdato: java.time.LocalDate? = null
         var startdato: java.time.LocalDate? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "antattOppholdsvarighet" -> parsedValues.antattOppholdsvarighet = Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard.AntattOppholdsvarighet.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "antallTidligereOpphold" -> parsedValues.antallTidligereOpphold = p.text.toLong()
                     "fraflyttingskommunenummer" -> parsedValues.fraflyttingskommunenummer = p.text
                     "fraflyttingsland" -> parsedValues.fraflyttingsland = p.text
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
-                    "sluttdato" -> parsedValues.sluttdato = LocalDate.parse(p.text)
-                    "startdato" -> parsedValues.startdato = LocalDate.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "sluttdato" -> parsedValues.sluttdato = java.time.LocalDate.parse(p.text)
+                    "startdato" -> parsedValues.startdato = java.time.LocalDate.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard(
                 antattOppholdsvarighet = parsedValues.antattOppholdsvarighet!!,
                 aarsak = parsedValues.aarsak,
@@ -142,8 +150,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard(
                 startdato = parsedValues.startdato,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

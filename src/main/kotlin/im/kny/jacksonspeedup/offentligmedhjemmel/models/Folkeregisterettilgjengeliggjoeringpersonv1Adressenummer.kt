@@ -21,47 +21,46 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param husnummer 
  * @param husbokstav 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer (
+
     @field:JsonProperty("husnummer")
     val husnummer: kotlin.String,
+
     @field:JsonProperty("husbokstav")
     val husbokstav: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var husnummer: kotlin.String? = null
         var husbokstav: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "husnummer" -> parsedValues.husnummer = p.text
 
@@ -71,14 +70,14 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer(
                 husnummer = parsedValues.husnummer!!,
                 husbokstav = parsedValues.husbokstav,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

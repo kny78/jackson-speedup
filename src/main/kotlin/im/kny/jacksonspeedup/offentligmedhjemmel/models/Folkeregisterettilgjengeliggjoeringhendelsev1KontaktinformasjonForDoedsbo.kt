@@ -25,17 +25,17 @@ import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjenge
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1OrganisasjonSomKontakt
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringhendelsev1PersonSomKontakt
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adresse 
  * @param attestutstedelsesdato 
  * @param skifteform 
@@ -48,38 +48,52 @@ import java.time.format.*
  * @param organisasjon 
  * @param person 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo (
+
     @field:JsonProperty("adresse")
     val adresse: Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo,
+
     @field:JsonProperty("attestutstedelsesdato")
     val attestutstedelsesdato: java.time.LocalDate,
+
     @field:JsonProperty("skifteform")
     val skifteform: Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo.Skifteform,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("advokat")
     val advokat: Folkeregisterettilgjengeliggjoeringhendelsev1AdvokatSomKontakt? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("organisasjon")
     val organisasjon: Folkeregisterettilgjengeliggjoeringhendelsev1OrganisasjonSomKontakt? = null,
+
     @field:JsonProperty("person")
     val person: Folkeregisterettilgjengeliggjoeringhendelsev1PersonSomKontakt? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: offentlig,annet
-    */
-    enum class Skifteform(val value: kotlin.String){
-        offentlig("offentlig"),
-        annet("annet");
+     * 
+     *
+     * Values: offentlig,annet
+     */
+    enum class Skifteform(val value: kotlin.String) {
+        @JsonProperty(value = "offentlig") offentlig("offentlig"),
+        @JsonProperty(value = "annet") annet("annet");
     }
     class ParsedValues{
         var adresse: Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo? = null
@@ -94,34 +108,29 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoe
         var organisasjon: Folkeregisterettilgjengeliggjoeringhendelsev1OrganisasjonSomKontakt? = null
         var person: Folkeregisterettilgjengeliggjoeringhendelsev1PersonSomKontakt? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "adresse" -> parsedValues.adresse = Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo.deserializer.deserialize(p, ctx)
-                    "attestutstedelsesdato" -> parsedValues.attestutstedelsesdato = LocalDate.parse(p.text)
+                    "attestutstedelsesdato" -> parsedValues.attestutstedelsesdato = java.time.LocalDate.parse(p.text)
 
                     "skifteform" -> parsedValues.skifteform = Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo.Skifteform.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
                     "advokat" -> parsedValues.advokat = Folkeregisterettilgjengeliggjoeringhendelsev1AdvokatSomKontakt.deserializer.deserialize(p, ctx)
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "organisasjon" -> parsedValues.organisasjon = Folkeregisterettilgjengeliggjoeringhendelsev1OrganisasjonSomKontakt.deserializer.deserialize(p, ctx)
                     "person" -> parsedValues.person = Folkeregisterettilgjengeliggjoeringhendelsev1PersonSomKontakt.deserializer.deserialize(p, ctx)
 
@@ -129,7 +138,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoe
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo(
                 adresse = parsedValues.adresse!!,
                 attestutstedelsesdato = parsedValues.attestutstedelsesdato!!,
@@ -144,8 +152,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoe
                 person = parsedValues.person,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

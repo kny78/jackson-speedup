@@ -21,55 +21,56 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adresselinje 
  * @param postnummer 
  * @param poststedsnavn 
  * @param landkode 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo (
+
     @field:JsonProperty("adresselinje")
     val adresselinje: kotlin.collections.List<kotlin.String>,
+
     @field:JsonProperty("postnummer")
     val postnummer: kotlin.String,
+
     @field:JsonProperty("poststedsnavn")
     val poststedsnavn: kotlin.String,
+
     @field:JsonProperty("landkode")
     val landkode: kotlin.String? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var adresselinje: List<kotlin.String>? = null
         var postnummer: kotlin.String? = null
         var poststedsnavn: kotlin.String? = null
         var landkode: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "adresselinje" -> {
                         val list : ArrayList<String> = ArrayList()
@@ -87,7 +88,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo(
                 adresselinje = parsedValues.adresselinje!!,
                 postnummer = parsedValues.postnummer!!,
@@ -95,8 +95,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo
                 landkode = parsedValues.landkode,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

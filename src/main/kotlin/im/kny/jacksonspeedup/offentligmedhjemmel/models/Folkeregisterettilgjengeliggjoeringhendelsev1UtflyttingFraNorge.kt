@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param aarsak 
  * @param ajourholdstidspunkt 
  * @param gyldighetstidspunkt 
@@ -41,25 +41,35 @@ import java.time.format.*
  * @param tilflyttingsstedIUtlandet 
  * @param utflyttingsdato 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge (
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("tilflyttingsland")
     val tilflyttingsland: kotlin.String? = null,
+
     @field:JsonProperty("tilflyttingsstedIUtlandet")
     val tilflyttingsstedIUtlandet: kotlin.String? = null,
+
     @field:JsonProperty("utflyttingsdato")
     val utflyttingsdato: java.time.LocalDate? = null
-) 
-{
+
+) {
+
     class ParsedValues{
         var aarsak: kotlin.String? = null
         var ajourholdstidspunkt: java.time.OffsetDateTime? = null
@@ -70,38 +80,32 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge(
         var tilflyttingsstedIUtlandet: kotlin.String? = null
         var utflyttingsdato: java.time.LocalDate? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "tilflyttingsland" -> parsedValues.tilflyttingsland = p.text
                     "tilflyttingsstedIUtlandet" -> parsedValues.tilflyttingsstedIUtlandet = p.text
-                    "utflyttingsdato" -> parsedValues.utflyttingsdato = LocalDate.parse(p.text)
+                    "utflyttingsdato" -> parsedValues.utflyttingsdato = java.time.LocalDate.parse(p.text)
 
                     else -> p.skipChildren()
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge(
                 aarsak = parsedValues.aarsak,
                 ajourholdstidspunkt = parsedValues.ajourholdstidspunkt,
@@ -113,8 +117,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1UtflyttingFraNorge(
                 utflyttingsdato = parsedValues.utflyttingsdato,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

@@ -23,17 +23,17 @@ package im.kny.jacksonspeedup.offentligmedhjemmel.models
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Poststed
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param adressenavn 
  * @param kommunenummer 
  * @param adressekode 
@@ -44,37 +44,49 @@ import java.time.format.*
  * @param coAdressenavn 
  * @param poststed 
  */
-data class Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse(
+
+data class Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse (
+
     @field:JsonProperty("adressenavn")
     val adressenavn: kotlin.String,
+
     @field:JsonProperty("kommunenummer")
     val kommunenummer: kotlin.String,
+
     @field:JsonProperty("adressekode")
     val adressekode: kotlin.String? = null,
+
     @field:JsonProperty("adressenummer")
     val adressenummer: Folkeregisterettilgjengeliggjoeringpersonv1Adressenummer? = null,
+
     @field:JsonProperty("adressetilleggsnavn")
     val adressetilleggsnavn: kotlin.String? = null,
+
     @field:JsonProperty("bruksenhetsnummer")
     val bruksenhetsnummer: kotlin.String? = null,
+
     @field:JsonProperty("bruksenhetstype")
     val bruksenhetstype: Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse.Bruksenhetstype? = null,
+
     @field:JsonProperty("coAdressenavn")
     val coAdressenavn: kotlin.String? = null,
+
     @field:JsonProperty("poststed")
     val poststed: Folkeregisterettilgjengeliggjoeringpersonv1Poststed? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: bolig,annetEnnBolig,fritidsbolig,ikkeGodkjentBolig,unummerertBruksenhet
-    */
-    enum class Bruksenhetstype(val value: kotlin.String){
-        bolig("bolig"),
-        annetEnnBolig("annetEnnBolig"),
-        fritidsbolig("fritidsbolig"),
-        ikkeGodkjentBolig("ikkeGodkjentBolig"),
-        unummerertBruksenhet("unummerertBruksenhet");
+     * 
+     *
+     * Values: bolig,annetEnnBolig,fritidsbolig,ikkeGodkjentBolig,unummerertBruksenhet
+     */
+    enum class Bruksenhetstype(val value: kotlin.String) {
+        @JsonProperty(value = "bolig") bolig("bolig"),
+        @JsonProperty(value = "annetEnnBolig") annetEnnBolig("annetEnnBolig"),
+        @JsonProperty(value = "fritidsbolig") fritidsbolig("fritidsbolig"),
+        @JsonProperty(value = "ikkeGodkjentBolig") ikkeGodkjentBolig("ikkeGodkjentBolig"),
+        @JsonProperty(value = "unummerertBruksenhet") unummerertBruksenhet("unummerertBruksenhet");
     }
     class ParsedValues{
         var adressenavn: kotlin.String? = null
@@ -87,22 +99,17 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse(
         var coAdressenavn: kotlin.String? = null
         var poststed: Folkeregisterettilgjengeliggjoeringpersonv1Poststed? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
                     "adressenavn" -> parsedValues.adressenavn = p.text
                     "kommunenummer" -> parsedValues.kommunenummer = p.text
@@ -120,7 +127,6 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse(
                 adressenavn = parsedValues.adressenavn!!,
                 kommunenummer = parsedValues.kommunenummer!!,
@@ -133,8 +139,9 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse(
                 poststed = parsedValues.poststed,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+

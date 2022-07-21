@@ -21,17 +21,17 @@
 package im.kny.jacksonspeedup.offentligmedhjemmel.models
 
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.type.*
-import java.time.*
-import java.time.format.*
+
+
 /**
  * 
+ *
  * @param sivilstand 
  * @param aarsak 
  * @param ajourholdstidspunkt 
@@ -45,48 +45,63 @@ import java.time.format.*
  * @param sted 
  * @param utland 
  */
-data class Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand(
+
+data class Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand (
+
     @field:JsonProperty("sivilstand")
     val sivilstand: Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand.Sivilstand,
+
     @field:JsonProperty("aarsak")
     val aarsak: kotlin.String? = null,
+
     @field:JsonProperty("ajourholdstidspunkt")
     val ajourholdstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("gyldighetstidspunkt")
     val gyldighetstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("kilde")
     val kilde: kotlin.String? = null,
+
     @field:JsonProperty("kommune")
     val kommune: kotlin.String? = null,
+
     @field:JsonProperty("myndighet")
     val myndighet: kotlin.String? = null,
+
     @field:JsonProperty("opphoerstidspunkt")
     val opphoerstidspunkt: java.time.OffsetDateTime? = null,
+
     @field:JsonProperty("relatertVedSivilstand")
     val relatertVedSivilstand: kotlin.String? = null,
+
     @field:JsonProperty("sivilstandsdato")
     val sivilstandsdato: java.time.LocalDate? = null,
+
     @field:JsonProperty("sted")
     val sted: kotlin.String? = null,
+
     @field:JsonProperty("utland")
     val utland: kotlin.String? = null
-) 
-{
+
+) {
+
     /**
-    * 
-    * Values: uoppgitt,ugift,gift,enkeEllerEnkemann,skilt,separert,registrertPartner,separertPartner,skiltPartner,gjenlevendePartner
-    */
-    enum class Sivilstand(val value: kotlin.String){
-        uoppgitt("uoppgitt"),
-        ugift("ugift"),
-        gift("gift"),
-        enkeEllerEnkemann("enkeEllerEnkemann"),
-        skilt("skilt"),
-        separert("separert"),
-        registrertPartner("registrertPartner"),
-        separertPartner("separertPartner"),
-        skiltPartner("skiltPartner"),
-        gjenlevendePartner("gjenlevendePartner");
+     * 
+     *
+     * Values: uoppgitt,ugift,gift,enkeEllerEnkemann,skilt,separert,registrertPartner,separertPartner,skiltPartner,gjenlevendePartner
+     */
+    enum class Sivilstand(val value: kotlin.String) {
+        @JsonProperty(value = "uoppgitt") uoppgitt("uoppgitt"),
+        @JsonProperty(value = "ugift") ugift("ugift"),
+        @JsonProperty(value = "gift") gift("gift"),
+        @JsonProperty(value = "enkeEllerEnkemann") enkeEllerEnkemann("enkeEllerEnkemann"),
+        @JsonProperty(value = "skilt") skilt("skilt"),
+        @JsonProperty(value = "separert") separert("separert"),
+        @JsonProperty(value = "registrertPartner") registrertPartner("registrertPartner"),
+        @JsonProperty(value = "separertPartner") separertPartner("separertPartner"),
+        @JsonProperty(value = "skiltPartner") skiltPartner("skiltPartner"),
+        @JsonProperty(value = "gjenlevendePartner") gjenlevendePartner("gjenlevendePartner");
     }
     class ParsedValues{
         var sivilstand: Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand.Sivilstand? = null
@@ -102,35 +117,30 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand(
         var sted: kotlin.String? = null
         var utland: kotlin.String? = null
     }
-
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand {
             val parsedValues = ParsedValues()
-
             var curr = p.currentToken
-
             if (curr != JsonToken.START_OBJECT) {
                 throw IllegalStateException("Should be start object")
             }
-
             curr = p.nextToken()
-
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                curr = p.nextToken()
+                p.nextToken()
                 when (field) {
 
                     "sivilstand" -> parsedValues.sivilstand = Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand.Sivilstand.valueOf(p.text)
 
                     "aarsak" -> parsedValues.aarsak = p.text
-                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = OffsetDateTime.parse(p.text)
-                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = OffsetDateTime.parse(p.text)
+                    "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)
+                    "gyldighetstidspunkt" -> parsedValues.gyldighetstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "kilde" -> parsedValues.kilde = p.text
                     "kommune" -> parsedValues.kommune = p.text
                     "myndighet" -> parsedValues.myndighet = p.text
-                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = OffsetDateTime.parse(p.text)
+                    "opphoerstidspunkt" -> parsedValues.opphoerstidspunkt = java.time.OffsetDateTime.parse(p.text)
                     "relatertVedSivilstand" -> parsedValues.relatertVedSivilstand = p.text
-                    "sivilstandsdato" -> parsedValues.sivilstandsdato = LocalDate.parse(p.text)
+                    "sivilstandsdato" -> parsedValues.sivilstandsdato = java.time.LocalDate.parse(p.text)
                     "sted" -> parsedValues.sted = p.text
                     "utland" -> parsedValues.utland = p.text
 
@@ -138,7 +148,6 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand(
                 }
                 curr = p.nextToken()
             }
-
             return Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand(
                 sivilstand = parsedValues.sivilstand!!,
                 aarsak = parsedValues.aarsak,
@@ -154,8 +163,9 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Sivilstand(
                 utland = parsedValues.utland,)
         }
     }
-
     companion object {
         val deserializer by lazy(LazyThreadSafetyMode.NONE) { Deserializer() }
     }
+
 }
+
