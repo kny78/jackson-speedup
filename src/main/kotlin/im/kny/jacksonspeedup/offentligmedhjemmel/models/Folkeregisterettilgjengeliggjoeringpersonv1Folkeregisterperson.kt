@@ -231,6 +231,7 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson (
         var utlendingsmyndighetenesIdentifikasjonsnummer: List<Folkeregisterettilgjengeliggjoeringpersonv1Personidentifikasjon>? = null
         var vergemaalEllerFremtidsfullmakt: List<Folkeregisterettilgjengeliggjoeringpersonv1VergemaalRepresentasjonEllerFremtidsfullmakt>? = null
     }
+
     @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson {

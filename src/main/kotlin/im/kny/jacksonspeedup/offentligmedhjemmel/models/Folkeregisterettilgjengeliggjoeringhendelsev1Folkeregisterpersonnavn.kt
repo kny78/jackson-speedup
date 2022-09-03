@@ -91,6 +91,8 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Folkeregisterpersonnavn 
         var opphoerstidspunkt: java.time.OffsetDateTime? = null
         var originaltNavn: Folkeregisterettilgjengeliggjoeringhendelsev1Personnavn? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Folkeregisterpersonnavn>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Folkeregisterpersonnavn {
             val parsedValues = ParsedValues()
@@ -101,7 +103,7 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Folkeregisterpersonnavn 
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
                     "etternavn" -> parsedValues.etternavn = p.text
                     "fornavn" -> parsedValues.fornavn = p.text

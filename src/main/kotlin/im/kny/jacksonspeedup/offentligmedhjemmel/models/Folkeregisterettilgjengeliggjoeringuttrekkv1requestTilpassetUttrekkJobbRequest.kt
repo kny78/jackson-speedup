@@ -124,6 +124,8 @@ data class Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJo
         var sivilstandstype: Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Sivilstandstype? = null
         var statsborgerskap: kotlin.String? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest {
             val parsedValues = ParsedValues()
@@ -134,7 +136,7 @@ data class Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJo
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
                     "personstatustyper" -> {
                         val list : ArrayList<Folkeregisterettilgjengeliggjoeringuttrekkv1requestTilpassetUttrekkJobbRequest.Personstatustyper> = ArrayList()

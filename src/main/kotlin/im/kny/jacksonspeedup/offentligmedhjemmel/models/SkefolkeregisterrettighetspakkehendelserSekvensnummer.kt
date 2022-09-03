@@ -45,6 +45,8 @@ data class SkefolkeregisterrettighetspakkehendelserSekvensnummer (
     class ParsedValues{
         var sekvensnummer: kotlin.Long? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<SkefolkeregisterrettighetspakkehendelserSekvensnummer>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterrettighetspakkehendelserSekvensnummer {
             val parsedValues = ParsedValues()
@@ -55,7 +57,7 @@ data class SkefolkeregisterrettighetspakkehendelserSekvensnummer (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "sekvensnummer" -> parsedValues.sekvensnummer = p.text.toLong()

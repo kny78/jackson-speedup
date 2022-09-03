@@ -108,6 +108,8 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoe
         var organisasjon: Folkeregisterettilgjengeliggjoeringhendelsev1OrganisasjonSomKontakt? = null
         var person: Folkeregisterettilgjengeliggjoeringhendelsev1PersonSomKontakt? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoedsbo {
             val parsedValues = ParsedValues()
@@ -118,7 +120,7 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktinformasjonForDoe
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
                     "adresse" -> parsedValues.adresse = Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseForDoedsbo.deserializer.deserialize(p, ctx)
                     "attestutstedelsesdato" -> parsedValues.attestutstedelsesdato = java.time.LocalDate.parse(p.text)

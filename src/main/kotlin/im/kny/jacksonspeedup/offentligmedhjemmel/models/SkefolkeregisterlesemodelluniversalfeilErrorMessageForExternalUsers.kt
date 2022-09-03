@@ -60,6 +60,8 @@ data class SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers (
         var httpStatus: kotlin.Int? = null
         var message: kotlin.String? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers {
             val parsedValues = ParsedValues()
@@ -70,7 +72,7 @@ data class SkefolkeregisterlesemodelluniversalfeilErrorMessageForExternalUsers (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "code" -> parsedValues.code = p.text

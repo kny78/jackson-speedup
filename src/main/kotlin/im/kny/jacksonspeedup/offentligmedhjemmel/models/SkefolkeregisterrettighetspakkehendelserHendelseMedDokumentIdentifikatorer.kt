@@ -65,6 +65,8 @@ data class SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifika
         var hendelsetype: kotlin.String? = null
         var persondokument: kotlin.String? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifikatorer {
             val parsedValues = ParsedValues()
@@ -75,7 +77,7 @@ data class SkefolkeregisterrettighetspakkehendelserHendelseMedDokumentIdentifika
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "ajourholdstidspunkt" -> parsedValues.ajourholdstidspunkt = java.time.OffsetDateTime.parse(p.text)

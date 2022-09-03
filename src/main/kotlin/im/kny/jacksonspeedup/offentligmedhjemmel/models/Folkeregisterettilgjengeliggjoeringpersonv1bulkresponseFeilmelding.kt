@@ -45,6 +45,8 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding (
     class ParsedValues{
         var feilmelding: kotlin.String? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding {
             val parsedValues = ParsedValues()
@@ -55,7 +57,7 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1bulkresponseFeilmelding (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
                     "feilmelding" -> parsedValues.feilmelding = p.text
 

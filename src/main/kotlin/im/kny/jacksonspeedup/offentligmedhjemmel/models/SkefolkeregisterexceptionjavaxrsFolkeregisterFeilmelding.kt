@@ -65,6 +65,8 @@ data class SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding (
         var httpStatus: kotlin.Int? = null
         var tilleggsinformasjon: kotlin.collections.Map<kotlin.String, kotlin.String>? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding {
             val parsedValues = ParsedValues()
@@ -75,7 +77,7 @@ data class SkefolkeregisterexceptionjavaxrsFolkeregisterFeilmelding (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "alvorlighetsgrad" -> parsedValues.alvorlighetsgrad = p.text

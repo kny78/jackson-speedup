@@ -106,6 +106,8 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard (
         var sluttdato: java.time.LocalDate? = null
         var startdato: java.time.LocalDate? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard {
             val parsedValues = ParsedValues()
@@ -116,7 +118,7 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "antattOppholdsvarighet" -> parsedValues.antattOppholdsvarighet = Folkeregisterettilgjengeliggjoeringhendelsev1OppholdPaaSvalbard.AntattOppholdsvarighet.valueOf(p.text)

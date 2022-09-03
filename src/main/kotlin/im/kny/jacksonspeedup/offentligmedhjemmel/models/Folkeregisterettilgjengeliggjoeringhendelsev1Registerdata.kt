@@ -283,6 +283,8 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata (
         var utlendingsmyndighetenesIdentifikasjonsnummer: Folkeregisterettilgjengeliggjoeringhendelsev1Personidentifikasjon? = null
         var vergemaalEllerFremtidsfullmakt: Folkeregisterettilgjengeliggjoeringhendelsev1VergemaalRepresentasjonEllerFremtidsfullmakt? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata {
             val parsedValues = ParsedValues()
@@ -293,7 +295,7 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "entitet" -> parsedValues.entitet = Folkeregisterettilgjengeliggjoeringhendelsev1Registerdata.Entitet.valueOf(p.text)

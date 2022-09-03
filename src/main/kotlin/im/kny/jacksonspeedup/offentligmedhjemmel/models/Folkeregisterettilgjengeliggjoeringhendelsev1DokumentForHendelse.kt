@@ -56,6 +56,8 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse (
         var hendelse: Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse? = null
         var skjemaversjon: kotlin.String? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse {
             val parsedValues = ParsedValues()
@@ -66,7 +68,7 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1DokumentForHendelse (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
                     "dokumentidentifikator" -> parsedValues.dokumentidentifikator = p.text
                     "hendelse" -> parsedValues.hendelse = Folkeregisterettilgjengeliggjoeringhendelsev1Hendelse.deserializer.deserialize(p, ctx)

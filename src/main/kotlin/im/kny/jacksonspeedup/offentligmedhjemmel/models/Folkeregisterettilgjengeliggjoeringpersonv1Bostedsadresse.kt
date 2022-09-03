@@ -139,6 +139,8 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Bostedsadresse (
         var ukjentBosted: Folkeregisterettilgjengeliggjoeringpersonv1UkjentBosted? = null
         var vegadresse: Folkeregisterettilgjengeliggjoeringpersonv1Vegadresse? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringpersonv1Bostedsadresse>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringpersonv1Bostedsadresse {
             val parsedValues = ParsedValues()
@@ -149,7 +151,7 @@ data class Folkeregisterettilgjengeliggjoeringpersonv1Bostedsadresse (
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "adressegradering" -> parsedValues.adressegradering = Folkeregisterettilgjengeliggjoeringpersonv1Bostedsadresse.Adressegradering.valueOf(p.text)

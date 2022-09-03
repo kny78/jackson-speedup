@@ -93,6 +93,8 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseIUtlandet 
         var utenlandskAdresse: Folkeregisterettilgjengeliggjoeringhendelsev1InternasjonalAdresse? = null
         var utenlandskAdresseIFrittFormat: Folkeregisterettilgjengeliggjoeringhendelsev1InternasjonalAdresseIFrittFormat? = null
     }
+
+    @Suppress("UNUSED_VALUE")
     class Deserializer : JsonDeserializer<Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseIUtlandet>() {
         override fun deserialize(p: JsonParser, ctx: DeserializationContext): Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseIUtlandet {
             val parsedValues = ParsedValues()
@@ -103,7 +105,7 @@ data class Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseIUtlandet 
             curr = p.nextToken()
             while (curr == JsonToken.FIELD_NAME) {
                 val field = p.text
-                p.nextToken()
+                curr = p.nextToken()
                 when (field) {
 
                     "adressegradering" -> parsedValues.adressegradering = Folkeregisterettilgjengeliggjoeringhendelsev1KontaktadresseIUtlandet.Adressegradering.valueOf(p.text)
