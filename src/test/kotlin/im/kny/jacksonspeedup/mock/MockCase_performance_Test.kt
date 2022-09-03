@@ -7,7 +7,6 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson
-
 import org.junit.jupiter.api.Test
 import java.text.DecimalFormat
 import kotlin.math.min
@@ -43,25 +42,24 @@ class MockCase_performance_Test {
             )
     }
 
-/*
+    /*
 
-    MANY TESTS
-    val warmupIterations = 20
-    val timedIterations = 1
-    val rounds = 30
-    val minSpeedup: Double = 2.5
-    */
+        MANY TESTS
+        val warmupIterations = 20
+        val timedIterations = 1
+        val rounds = 30
+        val minSpeedup: Double = 2.5
+        */
 
-    val warmupIterations = 2
-    val timedIterations = 1
-    val rounds = 3
+    val warmupIterations = 5
+    val rounds = 100
     val minSpeedup: Double = 2.0
 
     @Test
     fun withDeserializers() {
 
 
-        runIterations("Warmup", warmupIterations, objectMapperWithDeserializers)
+        (1..warmupIterations).forEach { runIterations("Warmup $it", objectMapperWithDeserializers) }
 
         var minDeserializeMs = Double.MAX_VALUE
         var minReflectionMs = Double.MAX_VALUE
@@ -70,10 +68,10 @@ class MockCase_performance_Test {
 
         (1..rounds).forEach {
             println("\nRound $it")
-            val tmp = runIterations("DeSerializers", timedIterations, objectMapperWithDeserializers)
+            val tmp = runIterations("DeSerializers", objectMapperWithDeserializers)
             minDeserializeMs = min(minDeserializeMs, tmp)
             sumDeserializerMs += tmp
-            val tmpRefl = runIterations("Reflection", timedIterations, objectMapperWithReflection)
+            val tmpRefl = runIterations("Reflection", objectMapperWithReflection)
             minReflectionMs = min(minReflectionMs, tmpRefl)
             sumReflectionMs += tmpRefl
         }
@@ -84,8 +82,8 @@ class MockCase_performance_Test {
         val speedup = minReflectionMs / minDeserializeMs
         val speedupStr = df.format(speedup)
 
-        val expParseTimeReflection = (11_000 * minReflectionMs) / (timedIterations)
-        val expParseTimeDeserializer = (11_000 * minDeserializeMs) / (timedIterations)
+        val expParseTimeReflection = (11_000 * minReflectionMs)
+        val expParseTimeDeserializer = (11_000 * minDeserializeMs)
         println(
             """
             Avg time Deserializers: $avgTimeDeserializers millis and min: ${df.format(minDeserializeMs)} millis
@@ -99,24 +97,23 @@ class MockCase_performance_Test {
             """.trimIndent()
         )
 
-
         assertTrue(speedup > minSpeedup, "Expect Speedup > $minSpeedup. Was: $speedupStr")
     }
 
 
     private fun runIterations(
         method: String,
-        iterations: Int,
+
         om: ObjectMapper,
     ): Double {
-        val stopWatchUtil = im.kny.jacksonspeedup.StopWatchUtil("$method - $iterations")
+        val stopWatchUtil = im.kny.jacksonspeedup.StopWatchUtil("$method")
+
         stopWatchUtil.use {
-            (1..iterations).forEach {
-                om.readValue(
-                    _1000_jsonDoks,
-                    Array<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson>::class.java
-                )
-            }
+            //byteInputStream.reset()
+            om.readValue(
+                _1000_jsonDoks,
+                Array<Folkeregisterettilgjengeliggjoeringpersonv1Folkeregisterperson>::class.java
+            )
         }
         return stopWatchUtil.sw.nanoTime / 1_000_000_000.0
     }
@@ -152,6 +149,10 @@ class MockCase_performance_Test {
         }
         sb.append("]")
         sb.toString()
+    }
+    val toByteArray by lazy(LazyThreadSafetyMode.NONE) { _1000_jsonDoks.toByteArray() }
+    val byteInputStream by lazy(LazyThreadSafetyMode.NONE) {
+        toByteArray.inputStream()
     }
 
     private val oneJsonDok: String by lazy(LazyThreadSafetyMode.NONE) {
