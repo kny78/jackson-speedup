@@ -24,7 +24,7 @@
 \newminted{zsh}{fontsize=\scriptsize,
     linenos,
     numbersep=8pt,
-    gobble=4,
+    gobble=12,
     frame=lines,
     bgcolor=bg,
     framesep=3mm}
@@ -152,24 +152,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % How OpenAPI generate classes
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \definecolor{bg}{rgb}{0.95,0.95,0.95}
 
-    \defverbatim[colored]\runOpenAPIGenerator{
-        \begin{zshcode}
-    # Generate code
-    java -jar openapi-generator-cli.jar generate \
-    -g kotlin --template-dir ./openapi-templates \
-    -c openapi-generator-config.yaml \
-    -o tmp \
-    -i src/main/resources/openapi/freg-api-offentlig-med-hjemmel.json \
-    --package-name im.kny.jacksonspeedup.offentligmedhjemmel
-
-    # Copy in the code
-    srcdir="src/main/kotlin/im/kny/jacksonspeedup/offentligmedhjemmel"
-    rm -rf \${srcdir}/models/
-    mv tmp/\${srcdir}/models \${srcdir}/
-        \end{zshcode}
-    }
 
     \begin{frame}
         \frametitle{How OpenAPI generate classes}
@@ -188,18 +171,60 @@
     \end{frame}
 
 
-
-
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Generate new code
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \definecolor{bg}{rgb}{0.95,0.95,0.95}
+
+
+    \defverbatim[colored]\runOpenAPIGenerator{
+        \begin{zshcode}
+            # Delete old code
+            rm -rf ./src/main/kotlin/im/kny/jacksonspeedup/offentligmedhjemmel
+
+            # Generate code
+            java -jar openapi-generator-cli.jar generate \
+            -g kotlin \
+            --global-property models,modelDocs=false \
+            -c openapi-generator-config.yaml \
+            --template-dir ./openapi-templates \
+            -i src/main/resources/openapi/freg-api-offentlig-med-hjemmel.json \
+            --package-name im.kny.jacksonspeedup.offentligmedhjemmel
+
+            # Compile the project
+            mvn clean
+            mvn test
+        \end{zshcode}
+    }
     \begin{frame}
         \frametitle{Generate Code}
-
         \runOpenAPIGenerator
-
     \end{frame}
 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Validation
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{frame}
+        \frametitle{Validation}
+        \begin{itemize}
+            \item Need to ensure that our mapping works!
+            \item Compare output from generated and reflection deserializer.
+        \end{itemize}
+    \end{frame}
+
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Speedup Results
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{frame}
+        \frametitle{Results}
+        \begin{itemize}
+            \item Speedup $\approx 3.0$
+            \item Faster startup-time (unit-tests)
+        \end{itemize}
+
+    \end{frame}
 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
