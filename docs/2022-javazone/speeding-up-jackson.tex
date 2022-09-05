@@ -41,8 +41,9 @@
 
 
 %Information to be included in the title page:
-\title{Speeding up Jackson JSON parsing 3x}
-\author{Kjetil Nygård}
+\title{Speeding up Jackson}
+\subtitle{3x speedup}
+\author{\href{pulk.hesten@gmail.com}{Kjetil Nygård}}
 \institute{TietoEvry}
 \date{September 6th, 2022}
 
@@ -60,21 +61,22 @@
     \begin{frame}
         \frametitle{Background - Norwegian Population Registry}
         \begin{columns}[c]
-            \begin{column}{.68\textwidth}
-                \begin{center}
+            \begin{column}{.58\textwidth}
+                \begin{block}{Folkeregistert - Skatt}
                     \begin{itemize}
-                        \item FREG
-                        \begin{itemize}
-                            \item 11 million people (JSONS)
-                            \item $\approx$ 5,6m alive
-                            \item GDPR - store pr customer
-                        \end{itemize}
-                        \item $\approx$ 1000 customers
-                        \item $\approx$ 100 full copies of FREG
+                        \item 11 million people (JSONS)
+                        \item $\approx 6$m active people
                         \item Periodically $>$ \numprint{60000} JSONs pr hour
-                        \item We have to handle $>$ \numprint{1000000} pr hour.
                     \end{itemize}
-                \end{center}
+                \end{block}
+                \begin{block}{TietoEvry}
+                    \begin{itemize}
+                        \item Distributor for $\approx$\numprint{1000} customers
+                        \item $\approx$ 100 full copies
+                        \item GDPR - separate customer data
+                        \item $>$ \numprint{6000000} JSONs pr hour.
+                    \end{itemize}
+                \end{block}
             \end{column}
             \begin{column}{.32\textwidth}
                 \begin{center}
@@ -90,35 +92,39 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{frame}
         \frametitle{Core Idea}
-        \begin{itemize}
-            \item OpenAPI generates Kotlin classes.
-            \item Jackson uses reflection to create objects.
-            \item Reflection is slow
-            \item Spec contains all info needed to deserialize
-            \item Generating the deserializer
-        \end{itemize}
+        \begin{block}{OpenAPI-generator}
+            OpenAPI generates Kotlin classes.
+        \end{block}
+        \begin{block}{Reflection}
+            Jackson uses reflection to create objects. \\
+            Reflection is slow.
+        \end{block}
+        \begin{block}{Generate deserializer}
+            Specification contains info needed to generate deserialize. \\
+            Generating the deserializer.
+        \end{block}
     \end{frame}
 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % OpenAPI specification
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{frame}[fragile]
-        \frametitle{OpenAPI Specification}
-        \begin{itemize}
-            \item Standard to describe RestAPIs
-            \begin{itemize}
-                \item Http Calls
-                \item JSON model for input and output data
-            \end{itemize}
-            \item Generate model:
-            \begin{itemize}
-                \item Code for most languages
-                \item Model classes
-                \item HTTP clients
-            \end{itemize}
-        \end{itemize}
-    \end{frame}
+%    \begin{frame}[fragile]
+%        \frametitle{OpenAPI Specification}
+%        \begin{itemize}
+%            \item Standard to describe RestAPIs
+%            \begin{itemize}
+%                \item Http Calls
+%                \item JSON model for input and output data
+%            \end{itemize}
+%            \item Generate model:
+%            \begin{itemize}
+%                \item Code for most languages
+%                \item Model classes
+%                \item HTTP clients
+%            \end{itemize}
+%        \end{itemize}
+%    \end{frame}
 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,26 +132,28 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{frame}
         \frametitle{Jackson: 3 levels of parsing}
-        \begin{enumerate}
-            \item JsonTokenizer
+
+        \begin{block}{JsonTokenizer}
             \begin{itemize}
                 \item Reads JSON as a stream, and divides into tokens
                 \item FIELD, VALUE, START\_OBJECT, \ldots
             \end{itemize}
-            \item NodeTree
+        \end{block}
+
+        \begin{block}{JsonNode}
             \begin{itemize}
-                \item Reads JSON into a generic tree structure
-                \item Primitives, Map<String, JsonNode>, List<JsonNode>
+                \item Generic tree structure
+                \item Primitives, List<JsonNode>, Map<String, JsonNode>
             \end{itemize}
-            \item Custom Kotlin / Java Objects (Value)
+        \end{block}
+
+        \begin{block}{Custom Kotlin / Java Objects (Value)}
             \begin{itemize}
-                \item MyObj, List<MyObj>, Map<String, MyObj>
+                \item Primitives, MyObj, List<MyObj>, Map<String, MyObj>
                 \item Uses reflection to map to Kotlin objects
                 \item Reflection is slow
             \end{itemize}
-        \end{enumerate}
-
-        \textbf{Number 3 is what we want}
+        \end{block}
     \end{frame}
 
 
@@ -184,12 +192,12 @@
 
             # Generate code
             java -jar openapi-generator-cli.jar generate \
-            -g kotlin \
-            --global-property models,modelDocs=false \
-            -c openapi-generator-config.yaml \
-            --template-dir ./openapi-templates \
-            -i src/main/resources/openapi/freg-api-offentlig-med-hjemmel.json \
-            --package-name im.kny.jacksonspeedup.offentligmedhjemmel
+                -g kotlin \
+                --global-property models,modelDocs=false \
+                -c openapi-generator-config.yaml \
+                --template-dir ./openapi-templates \
+                -i src/main/resources/openapi/freg-api-offentlig-med-hjemmel.json \
+                --package-name im.kny.jacksonspeedup.offentligmedhjemmel
 
             # Compile the project
             mvn clean
@@ -207,33 +215,51 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{frame}
         \frametitle{Validation}
-        \begin{itemize}
-            \item Need to ensure that our mapping works!
-            \item Compare output from generated and reflection deserializer.
-        \end{itemize}
+        \begin{columns} % align columns
+            \begin{column}{.48\textwidth}
+                \begin{block}{Requirement}
+                    Reflection and generated deserializers should produce the same mapping.
+                \end{block}
+            \end{column}
+            \begin{column}{.4\textwidth}
+                \\[0.45cm]
+                \includegraphics[width=\textwidth]{images/same-same}
+            \end{column}
+        \end{columns}
     \end{frame}
 
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % Speedup Results
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Speedup Results
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{frame}
-        \frametitle{Results}
-        \begin{itemize}
-            \item Speedup $\approx 3.0$
-            \item Faster startup-time (unit-tests)
-        \end{itemize}
+        \frametitle{Performance testing}
+
+        \begin{block}{Speedup}
+            $2.7 \le \textrm{speedup} \le 3.2$
+        \end{block}
+        \begin{block}{Startup time}
+
+            \begin{itemize}
+                \item Reflection $0.8 - 1.4$ ms
+                \item Deserializers $0.25 - 0.35$ms
+            \end{itemize}
+
+            Important for unit-tests!
+        \end{block}
 
     \end{frame}
 
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % The End
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The End
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{frame}
         \frametitle{Thank you for your attention}
-        If you want to see example code: \url{https://github.com/kny78/jackson-speedup/}
-
+        Example-code:\\
+        \href{https://github.com/kny78/jackson-speedup/}{github.com/kny78/jackson-speedup/}\\[1,0cm]
+        OpenAPI-generator PR: \\
+        \href{https://github.com/OpenAPITools/openapi-generator/pull/13267}{github.com/OpenAPITools/openapi-generator/pull/13267}\\
     \end{frame}
 
 

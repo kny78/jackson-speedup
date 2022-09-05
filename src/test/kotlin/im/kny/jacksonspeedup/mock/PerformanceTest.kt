@@ -10,7 +10,7 @@ import im.kny.jacksonspeedup.offentligmedhjemmel.models.Folkeregisterettilgjenge
 
 class PerformanceTest : AbstractDeserializerTest() {
 
-    val rounds = 30
+    val rounds = 10
     val minSpeedup: Double = 2.0
 
     @Test

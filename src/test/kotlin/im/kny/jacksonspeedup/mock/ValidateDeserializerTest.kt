@@ -11,12 +11,12 @@ class ValidateDeserializerTest : AbstractDeserializerTest() {
     @Test
     fun validateMapping() {
         val data = oneJsonDok
-        val valueWithDeserializers: FregPerson = objectMapperWithDeserializers.readValue(data, FregPerson::class.java)
-        val treeGenratedDeserializer: JsonNode = objectMapperWithDeserializers.valueToTree(valueWithDeserializers)
+        val valueDeserializer: FregPerson = objectMapperWithDeserializers.readValue(data, FregPerson::class.java)
+        val treeDeserializer: JsonNode = objectMapperWithDeserializers.valueToTree(valueDeserializer)
 
-        val valueWithReflection: FregPerson = objectMapperWithReflection.readValue(data, FregPerson::class.java)
-        val reflectionTree: JsonNode = objectMapperWithReflection.valueToTree(valueWithReflection)
+        val valueReflection: FregPerson = objectMapperWithReflection.readValue(data, FregPerson::class.java)
+        val treeReflection: JsonNode = objectMapperWithReflection.valueToTree(valueReflection)
 
-        assertEquals(treeGenratedDeserializer, reflectionTree, "tree")
+        assertEquals(treeReflection, treeDeserializer, "tree should be equal")
     }
 }
