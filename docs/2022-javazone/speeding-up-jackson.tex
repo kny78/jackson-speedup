@@ -62,11 +62,11 @@
         \frametitle{Background - Norwegian Population Registry}
         \begin{columns}[c]
             \begin{column}{.58\textwidth}
-                \begin{block}{Folkeregistert - Skatt}
+                \begin{block}{Norwegian Population Registry}
                     \begin{itemize}
                         \item 11 million people (JSONS)
                         \item $\approx 6$m active people
-                        \item Periodically $>$ \numprint{60000} JSONs pr hour
+                        \item $>$ \numprint{60000} JSONs pr hour
                     \end{itemize}
                 \end{block}
                 \begin{block}{TietoEvry}
@@ -95,13 +95,13 @@
         \begin{block}{OpenAPI-generator}
             OpenAPI generates Kotlin classes.
         \end{block}
-        \begin{block}{Reflection}
-            Jackson uses reflection to create objects. \\
+        \begin{block}{Jackson}
+            Jackson uses reflection to create objects from JSON. \\
             Reflection is slow.
         \end{block}
         \begin{block}{Generate deserializer}
-            Specification contains info needed to generate deserialize. \\
-            Generating the deserializer.
+            OpenAPI Specification contains the info needed to generate deserializers. \\
+            Therefore we can generate the deserializer.
         \end{block}
     \end{frame}
 
@@ -147,7 +147,7 @@
             \end{itemize}
         \end{block}
 
-        \begin{block}{Custom Kotlin / Java Objects (Value)}
+        \begin{block}{Custom Objects (Value)}
             \begin{itemize}
                 \item Primitives, MyObj, List<MyObj>, Map<String, MyObj>
                 \item Uses reflection to map to Kotlin objects
@@ -241,11 +241,9 @@
         \begin{block}{Startup time}
 
             \begin{itemize}
-                \item Reflection $0.8 - 1.4$ ms
-                \item Deserializers $0.25 - 0.35$ms
+                \item Reflection $800 - 1400$ ms
+                \item Deserializers $250 - 350$ ms
             \end{itemize}
-
-            Important for unit-tests!
         \end{block}
 
     \end{frame}
